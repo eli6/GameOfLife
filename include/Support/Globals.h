@@ -13,12 +13,10 @@
 
 using namespace std;
 
-/** the actual width and height of the used world. */
+// The actual width and height of the used world
 extern Dimensions WORLD_DIMENSIONS;
 
-/**
-Name of file to read
-*/
+// Name of file to read
 extern string fileName;
 
 

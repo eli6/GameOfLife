@@ -13,11 +13,7 @@
 #include "Support/FileLoader.h"
 #include "Support/Globals.h"
 
-/**
-Initializing cell culture and the concrete rules to be used in simulation.
-@param evenRuleName the name of the rule to be used on even iterations.
-@param oddRuleName the name of the rule to be used on odd iterations.
-*/
+// Initializing cell culture and the concrete rules to be used in simulation.
 void Population::initiatePopulation(string evenRuleName, string oddRuleName) {
     // Determine whether the cell culture should be randomized or built from file.
     if (!fileName.empty())
@@ -32,17 +28,13 @@ void Population::initiatePopulation(string evenRuleName, string oddRuleName) {
     this->oddRuleOfExistence = RuleFactory::getInstance().createAndReturnRule(cells, oddRuleName);
 }
 
-/**
-Send cells map to FileLoader, which will populate its culture based on file values.
-*/
+// Send cells map to FileLoader, which will populate its culture based on file values.
 void Population::buildCellCultureFromFile() {
     FileLoader fileLoader;
     fileLoader.loadPopulationFromFile(cells);
 }
 
-/**
-Build cell culture based on randomized starting values.
-*/
+// Build cell culture based on randomized starting values.
 void Population::randomizeCellCulture() {
     default_random_engine generator(static_cast<unsigned>(time(0)));
     uniform_int_distribution<int> random(0, 1);
@@ -70,9 +62,7 @@ void Population::randomizeCellCulture() {
     }
 }
 
-/**
-Destructor that frees allocated memory.
-*/
+// Destructor that frees allocated memory.
 Population::~Population() {
     if (evenRuleOfExistence != nullptr) {
         delete evenRuleOfExistence;
@@ -82,10 +72,7 @@ Population::~Population() {
     }
 }
 
-/**
-* Update the cell population and determine next generational changes based on rules.
-* @return int current generation number.
-*/
+// Update the cell population and determine next generational changes based on rules.
 int Population::calculateNewGeneration() {
 
     // update the states of cells

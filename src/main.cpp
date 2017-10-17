@@ -26,9 +26,7 @@ int main(int argc, char* argv[]) {
             GameOfLife gameOfLife = GameOfLife(appValues.maxGenerations, appValues.evenRuleName, appValues.oddRuleName);
             gameOfLife.runSimulation();
         }
-        catch(ios_base::failure &e){
-
-        }
+        catch(ios_base::failure &e){}
 
     }
 

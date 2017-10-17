@@ -14,13 +14,11 @@
 
 using namespace std;
 
-/**
-@brief Determines starting values for simulation, based on contents of specified file.
+/*
+Determines starting values for simulation, based on contents of specified file.
 
 Reads startup values from specified file, containing values for WORLD_DIMENSIONS and cell Population.
 Will create the corresponding cells.
-
-@test Validate read values, regarding both WORLD_DIMENSIONS and map of cells.
 */
 class FileLoader {
 

@@ -12,8 +12,8 @@
 #include "ScreenPrinter.h"
 #include <string>
 
-/**
-@brief The heart of the simulation, interconnects the main execution with the graphical presentation.
+/*
+The heart of the simulation, interconnects the main execution with the graphical presentation.
 
 Creates and manages Population and the ScreenPrinter instances. Will instruct the Population of cells to keep
 updating as long as the specified number of generations is not reached, and for each iteration instruct

@@ -31,7 +31,6 @@ private:
     void setPrimeElder(Cell* newElder);
 
 public:
-    /** Concrete class (Erik) constructor */
     RuleOfExistence_Erik(map<Point, Cell>& cells)
             : RuleOfExistence({2,3,3}, cells, ALL_DIRECTIONS, "erik"), usedCellValue('E') {
         primeElder = nullptr;

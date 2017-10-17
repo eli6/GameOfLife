@@ -6,11 +6,7 @@
 */
 #include "Cell_Culture/Cell.h"
 
-/**
-* Constructor that determines the cell's starting values.
-* @param isRimCell whether the cell is a rim cell.
-* @param action whether the cell should have a starting value. Defaults to DO_NOTHING.
-*/
+// Constructor that determines the cell's starting values.
 Cell::Cell(bool isRimCell, ACTION action) : details({ 0,STATE_COLORS.LIVING, isRimCell, '#' }) {
     // the cell will update to its initial state
     nextUpdate.nextColor = (action == GIVE_CELL_LIFE) ? STATE_COLORS.LIVING : STATE_COLORS.DEAD;
@@ -20,10 +16,7 @@ Cell::Cell(bool isRimCell, ACTION action) : details({ 0,STATE_COLORS.LIVING, isR
     updateState();
 }
 
-/**
-* Updates the cell to its new state, based on stored update values.
-* @return void
-*/
+// Updates the cell to its new state, based on stored update values.
 void Cell::updateState() {
     switch (this->nextUpdate.nextGenerationAction)
     {
@@ -51,10 +44,7 @@ void Cell::updateState() {
     this->nextUpdate.nextGenerationAction = DO_NOTHING;	// reset next action
 }
 
-/**
-* Determines whether the cell is alive/dead.
-* @return true if alive, else false
-*/
+// is the cell alive?
 bool Cell::isAlive() {
     if (details.rimCell) {
         return false;
@@ -64,11 +54,7 @@ bool Cell::isAlive() {
     }
 }
 
-/**
-* Sets the cells next action to take in its coming update.
-* @param action defining next update state.
-* @return void
-*/
+// Sets the cells next action to take in its coming update.
 void Cell::setNextGenerationAction(ACTION action) {
     if (details.rimCell)
         return;

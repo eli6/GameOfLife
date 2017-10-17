@@ -46,17 +46,10 @@ public:
     void initiatePopulation(string evenRuleName, string oddRuleName = "");
     int calculateNewGeneration();
 
-    /**
-    Returns cell by specified key value.
-    @param position the point of relevant cell.
-    @return Cell the cell at key position.
-    */
+    // Returns cell by specified key value.
     Cell& getCellAtPosition(Point position) { return cells.at(position); }
 
-    /**
-    Gets the total amount of cells in the population, regardless of state.
-    @return int total population
-    */
+    // Gets the total amount of cells in the population, regardless of state.
     int getTotalCellPopulation() { return cells.size(); }
 
 };

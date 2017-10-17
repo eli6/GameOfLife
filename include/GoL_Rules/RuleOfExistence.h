@@ -21,12 +21,9 @@ of the simulation, and determines the fate of each cell in the world population.
 
 // Data structure for storing population limits. Used by rules to determine what ACTION to make.
 struct PopulationLimits {
-    /** cell dies of loneliness. */
-    int UNDERPOPULATION,
-    /** cell dies of crowding. */
-            OVERPOPULATION,
-    /** cell lives on / is resurrected. */
-            RESURRECTION;
+    int UNDERPOPULATION, // cell dies of loneliness
+            OVERPOPULATION, // cell dies of over crowding
+            RESURRECTION; // cell lives on / is resurrected
 };
 
 // Data structure for storing directional values. Used by rules to determine neighbouring cells.

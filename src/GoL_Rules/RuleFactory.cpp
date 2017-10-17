@@ -10,7 +10,7 @@
 #include "GoL_Rules/RuleOfExistence_VonNeumann.h"
 #include "GoL_Rules/RuleOfExistence_Erik.h"
 
-// Singleton factory reciever.
+// Singleton factory receiver.
 RuleFactory& RuleFactory::getInstance() {
     static RuleFactory ruleFactory;	// only one instance of variable is allowed
     return ruleFactory;

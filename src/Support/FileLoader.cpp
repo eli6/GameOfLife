@@ -11,11 +11,7 @@
 #include <iostream>
 #include <Cell_Culture/Population.h>
 
-/**
-* Loads the given map with cells read from the file thats pointed to by The global variable fileName
-* @param cells The cells map that will hold the cells read from the file
-* @return void
-*/
+// Loads the given map with cells read from the file thats pointed to by The global variable fileName
 void FileLoader::loadPopulationFromFile(map<Point, Cell>& cells) {
 
     // Open file for reading, if file cant be found throw an exception that
