@@ -18,7 +18,7 @@ using namespace std;
 struct ApplicationValues {
     bool runSimulation = true;
     string evenRuleName, oddRuleName;
-    int maxGenerations = 10;
+    int maxGenerations = 100;
 
 };
 
