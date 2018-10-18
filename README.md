@@ -1,3 +1,3 @@
 README for project
 
-authors: Fredrik Arhusiander, Elin Fritjofsson
+authors: Fredrik Arhusiander, Elin Fritiofsson
