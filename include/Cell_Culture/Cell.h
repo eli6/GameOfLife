@@ -1,9 +1,9 @@
-/*
- * @file       Cell.h
- * @author     Erik Ström
- * @date       October 2017
- * @version    0.1
- * @brief      The Cell class, the enum STATE_COLORS and the struct StateColors.
+/**
+ * @file       Cell.h.
+ * @author     Erik Ström.
+ * @date       October 2017.
+ * @version    0.1.
+ * @brief      Contains the Cell class, the enum STATE_COLORS and the struct StateColors.
 */
 
 #ifndef cellH
@@ -41,6 +41,7 @@ enum ACTION { KILL_CELL, IGNORE_CELL, GIVE_CELL_LIFE, DO_NOTHING };
  * 1. Rim cells: those representing the outer limits of the world. They are immutable,
  * exempt from the rules of the game, thus their values may not be changed.
  * 2. Non-rim cells: May be changed and edited in ways specified by the rules.
+ * @test Test constructor and member functions
  */
 class Cell {
 
