@@ -28,6 +28,11 @@ determining which rules should be required from the RuleFactory, and store the p
 Population's main responsibility during execution is determining which rule to apply for each new generation
 and updating the cells to their new states.
 */
+/***
+ * @brief
+ * @details
+ * @test
+ */
 class Population
 {
 private:
