@@ -6,5 +6,5 @@
  * @brief Contains all our tests.
 */
 
-#include "catch.hpp"
+#include <catch.hpp>
 //#include "../include/"
