@@ -4,7 +4,7 @@ Doxygen files for generation of documentation are in folder "docs". Test files a
 
 ## Requirements
 
-To run the tests you need to have an environmental variable called ```$TOOLS_INCLUDE`` configured, that contains the file "catch.hpp".
+To run the tests you need to have an environmental variable called ``$TOOLS_INCLUDE`` configured, that contains the file "catch.hpp".
 
 
 ## Getting Started
@@ -25,7 +25,7 @@ doxygen Doxyfile && cd html && open index.html
 Now you can read everything about GameOfLife!
 
 ###Run tests
-The file ```src/main``` are commented out in CMakeLists.txt, so the Catch tests will run automatically.
+The file "src/main.cpp" is commented out in CMakeLists.txt, so the Catch tests will run automatically.
 
 ## FAQ
 
