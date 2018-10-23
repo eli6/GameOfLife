@@ -199,7 +199,7 @@ public:
 
     /**
      * @brief Setter for 'nextValue'
-     * @details This is the value the member 'value' will have after the Cell's next update
+     * @details This is the value (cell character printed on screen) the member 'value' will have after the Cell's next update
      * @param value The character that is printed to the screen
      *
      * @test Test so that the member is updated correctly
@@ -208,7 +208,7 @@ public:
 
     /**
      * @brief Sets whether the cell is alive or dead next generation.
-     * @param isAliveNext a boolean value (cell character printed on screen) that represents if the Cell will be alive
+     * @param isAliveNext a boolean value that represents if the Cell will be alive
      * the next generation
      *
      * @test Test so that the member 'willBeAlive' is updated correctly
