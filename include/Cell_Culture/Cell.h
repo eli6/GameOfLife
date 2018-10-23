@@ -208,7 +208,7 @@ public:
 
     /**
      * @brief Sets whether the cell is alive or dead next generation.
-     * @param isAliveNext a boolean value that represents if the Cell will be alive
+     * @param isAliveNext a boolean value (cell character printed on screen) that represents if the Cell will be alive
      * the next generation
      *
      * @test Test so that the member 'willBeAlive' is updated correctly
