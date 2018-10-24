@@ -57,7 +57,7 @@ SCENARIO("We create a Cell object"){
             cell.setNextCellValue('M');
             AND_WHEN("its next color is set to cyan"){
                 cell.setNextColor(COLOR::CYAN);
-                AND_THEN("the cells next action is set to GIVE_CELL_LIFE instead of DO_NOTHING so that the updateState() switch is activated"){
+                AND_WHEN("the cells next action is set to GIVE_CELL_LIFE instead of DO_NOTHING so that the updateState() switch is activated"){
                     cell.setNextGenerationAction(GIVE_CELL_LIFE);
                     AND_THEN("the cells state is updated so the color and value are set")
                         cell.updateState();
@@ -172,17 +172,18 @@ SCENARIO("We create a Cell object"){
                             REQUIRE(oldColor == cell.getColor());
                         }
                     }
-                    AND_WHEN("a rim cell is configured in the same way"){
-                        Cell cell2(true, GIVE_CELL_LIFE);
-                        AND_WHEN("updateState() is run"){
-                            cell2.updateState();
-                            THEN("the cell should not be alive"){
-                                REQUIRE_FALSE(cell.isAlive());
 
-                            }
-                            THEN("the cells age should not have been incremented be 0"){
-                                REQUIRE(cell.getAge() == 0);
-                            }
+                }
+                AND_WHEN("a rim cell is configured in the same way"){
+                    Cell cell2(true, GIVE_CELL_LIFE);
+                    AND_WHEN("updateState() is run"){
+                        cell2.updateState();
+                        THEN("the cell should not be alive"){
+                            REQUIRE_FALSE(cell.isAlive());
+
+                        }
+                        THEN("the cells age should not have been incremented be 0"){
+                            REQUIRE(cell.getAge() == 0);
                         }
                     }
                 }
@@ -191,7 +192,7 @@ SCENARIO("We create a Cell object"){
 
     }
 
-
+    //TEST OF ADDITIONAL CONSTRUCTOR SCENARIOS.
     GIVEN("A cell object with action = GIVE_CELL_LIFE"){
         Cell cell(false, GIVE_CELL_LIFE);
         THEN("it should be a non-rim cell"){
