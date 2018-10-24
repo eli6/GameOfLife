@@ -12,6 +12,7 @@
 #include <iostream>
 #include "../include/Cell_Culture/Cell.h"
 
+
 SCENARIO("We create a Cell object"){
 
     //TESTING CONSTRUCTOR
@@ -65,7 +66,7 @@ SCENARIO("We create a Cell object"){
                             THEN("its next cell value should be M"){
                                 REQUIRE(cell.getCellValue() == 'M');
                             }
-                            AND_THEN("its color should be cyan"){
+                            THEN("its color should be cyan"){
                                 REQUIRE(cell.getColor() == COLOR::CYAN);
                             }
                         }
@@ -102,12 +103,12 @@ SCENARIO("We create a Cell object"){
                                 REQUIRE(formerAge+1 == cell.getAge());
                             }
                         }
-                        AND_THEN("value should be the same as before"){
+                        THEN("value should be the same as before"){
                             REQUIRE(oldValue == cell.getCellValue());
 
                         }
 
-                        AND_THEN("color should also be the same"){
+                        THEN("color should also be the same"){
                             REQUIRE(oldColor == cell.getColor());
                         }
                     }
@@ -118,7 +119,7 @@ SCENARIO("We create a Cell object"){
                             THEN("after the next update. nextGenerationAction should firsthave been reset to DO_NOTHING"){
                                 cell.updateState();
                                 REQUIRE(cell.getNextGenerationAction() == DO_NOTHING);
-                                AND_THEN("the color should have changed"){
+                                AND_THEN("the color should have changed to black"){
                                     REQUIRE(cell.getColor() == COLOR::BLACK);
                                 }
                                 AND_THEN("the value should have changed"){
@@ -139,14 +140,14 @@ SCENARIO("We create a Cell object"){
                             REQUIRE_FALSE(cell.isAlive());
 
                         }
-                        AND_THEN("the cells age should be 0"){
+                        THEN("the cells age should be 0"){
                             REQUIRE(cell.getAge() == 0);
                         }
-                        AND_THEN("value should be the same as before"){
+                        THEN("value should be the same as before"){
                             REQUIRE(oldValue == cell.getCellValue());
 
                         }
-                        AND_THEN("color should also be the same"){
+                        THEN("color should also be the same"){
                             REQUIRE(oldColor == cell.getColor());
                         }
                     }
@@ -160,14 +161,14 @@ SCENARIO("We create a Cell object"){
                             REQUIRE(cell.isAlive());
 
                         }
-                        AND_THEN("the cells age should be 1"){
+                        THEN("the cells age should be 1"){
                             REQUIRE(cell.getAge() == 1);
                         }
-                        AND_THEN("value should be the same as before"){
+                        THEN("value should be the same as before"){
                             REQUIRE(oldValue == cell.getCellValue());
 
                         }
-                        AND_THEN("color should also be the same"){
+                        THEN("color should also be the same"){
                             REQUIRE(oldColor == cell.getColor());
                         }
                     }
@@ -179,7 +180,7 @@ SCENARIO("We create a Cell object"){
                                 REQUIRE_FALSE(cell.isAlive());
 
                             }
-                            AND_THEN("the cells age should not have been incremented be 0"){
+                            THEN("the cells age should not have been incremented be 0"){
                                 REQUIRE(cell.getAge() == 0);
                             }
                         }
