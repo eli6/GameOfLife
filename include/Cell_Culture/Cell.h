@@ -115,7 +115,7 @@ public:
 
     /**
      * @brief Constructor for the class Cell
-     * @details Sets the values for both structs in the Cell object
+     * @details Sets the values for both structs in the Cell object. The implementation sets default values of CellDetails to age = 0, color = dead (unless action is GIVE_CELL_LIFE), and screen character = #.
      * @param isRimCell a boolean value set to 'false'
      * @param action an ACTION value set to 'DO_NOTHING'
      *
