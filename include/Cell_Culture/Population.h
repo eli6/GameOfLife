@@ -58,9 +58,11 @@ public:
 
     /**
      * @brief Initiates the population of cells
-     * @details Based on the name of the rule, for example "Erik".
-     * @param evenRuleName
-     * @param oddRuleName
+     * @details Based on the name of the rule, for example "Erik". It's optional to have
+     * a second rule.
+     * @param evenRuleName A string value representing a rule name
+     * @param oddRuleName A string value representing a rule name. It will be set equal to evenRuleName
+     * if no value is given.
      * @test If 'fileName' is empty, it should build cell culture randomly, otherwise from
      * file. If oddRuleName is empty, it should equal evenRuleName. The cell culture chould
      * be initiated correctly, check the 'cells' member after initialization.
@@ -69,13 +71,12 @@ public:
     int calculateNewGeneration();
 
     /**
-     * @brief Returns cell by specified key value.
+     * @brief Returns cell by specified Point value.
      * @param position A Point data type
-     * @return A reference to a Cell value
+     * @return A reference to a Cell object
      */
     Cell& getCellAtPosition(Point position) { return cells.at(position); }
 
-    // Gets the total amount of cells in the population, regardless of state.
     /**
      * @brief Getter for the number of Cells in the population
      * @return An int representing the Cell population size
