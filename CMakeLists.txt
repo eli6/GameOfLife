@@ -48,13 +48,10 @@ set(SRC_LIST
         include/Support/MainArguments.h
         src/Support/MainArguments.cpp
         test/test-main.cpp
-        test/test-population.cpp
-        test/test-gameoflife.cpp)
+        test/test-population.cpp)
 
 set(TEST_LIST
-
-        test/test-gameoflife.cpp
-            test/test-main.cpp
+        test/test-main.cpp
         test/test-population.cpp)
 
 add_executable(${PROJECT_NAME} ${SRC_LIST} ${TEST_LIST})
