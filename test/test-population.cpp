@@ -7,36 +7,34 @@
  */
 
 #include "catch.hpp"
+#include "Cell_Culture/Population.h"
 
 SCENARIO("A population of cells") {
     /*
-     * Testing constructor
+     * Testing initiatePopulation()
      */
     GIVEN("We create a population") {
         Population population;
-        THEN("The member generation should be set to 0") {
-            REQUIRE(population.calculateNewGeneration() == 1) //frågan är, går det att köra denna?
-        }
-
-        /*
-         * Testing initiatePopulation()
-         */
         WHEN("We initiate the population with the rule 'conway'") {
-            population.initiatePopulation(conway)
+            population.initiatePopulation("conway");
             THEN("There should be a cell population") {
-                REQUIRE(population.getTotalCellPopulation() > 0)
+                REQUIRE(population.getTotalCellPopulation() > 0);
+            }
+            // Testing calculateNewGeneration()
+            THEN("The member generation should be set to 1") {
+                REQUIRE(population.calculateNewGeneration() == 1);
             }
         }
         WHEN("We initiate the population with the rule 'erik'") {
-            population.initiatePopulation(erik)
+            population.initiatePopulation("erik");
             THEN("There should be a cell population") {
-                REQUIRE(population.getTotalCellPopulation() > 0)
+                REQUIRE(population.getTotalCellPopulation() > 0);
             }
         }
         WHEN("We initiate the population with the rule 'von_neumann'") {
-            population.initiatePopulation(von_neumann)
+            population.initiatePopulation("on_neumann");
             THEN("There should be a cell population") {
-                REQUIRE(population.getTotalCellPopulation() > 0)
+                REQUIRE(population.getTotalCellPopulation() > 0);
             }
         }
     }
