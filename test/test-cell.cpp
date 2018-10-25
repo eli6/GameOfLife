@@ -206,7 +206,7 @@ SCENARIO("We test that updateState() change the cell as expected, as well as tes
                 //update the cells state.
                 cell.updateState();
             }
-            //action was set to do nothing, so color, value and age should be the same as before.
+            //we set no nextUpdate values for color and value, so color and valuu should be the same as before.
             THEN("cells color should be the same") {
                 REQUIRE(oldColor == cell.getColor());
             }
@@ -225,18 +225,21 @@ SCENARIO("We test that updateState() change the cell as expected, as well as tes
             cell.setNextGenerationAction(IGNORE_CELL);
             AND_WHEN("updateState() is run") {
                 cell.updateState();
+
+                //ignore_cell means the cell should age by 1.
                 THEN("age should have incremented by 1 if the cell is alive") {
                     if (cell.isAlive()) {
                         REQUIRE(formerAge + 1 == cell.getAge());
                     }
                 }
-                THEN("value should be the same as before") {
-                    REQUIRE(oldValue == cell.getCellValue());
 
+                //we set no values for NextGeneration so color and value should be the same as before.
+                THEN("cells color should be the same") {
+                    REQUIRE(oldColor == cell.getColor());
                 }
 
-                THEN("color should also be the same") {
-                    REQUIRE(oldColor == cell.getColor());
+                THEN("the cells value should be the same as well") {
+                    REQUIRE(oldValue == cell.getCellValue());
                 }
             }
 
@@ -245,9 +248,11 @@ SCENARIO("We test that updateState() change the cell as expected, as well as tes
                 cell.setNextCellValue('X');
                 AND_WHEN("updateState() is run") {
                     cell.updateState();
-                    THEN("after the next update. nextGenerationAction should firsthave been reset to DO_NOTHING"){
+                    //testing that updateState() resets its value as it should
+                    THEN("after the next update. nextGenerationAction should first have been reset to DO_NOTHING"){
                         REQUIRE(cell.getNextGenerationAction() == DO_NOTHING);
                     }
+                    //we set nextGenerationValues for both color and value, so these should have changed now:
                     THEN("the color should have changed to black") {
                         REQUIRE(cell.getColor() == COLOR::BLACK);
                     }
@@ -307,10 +312,7 @@ SCENARIO("We test that updateState() change the cell as expected, as well as tes
             Cell cell2(true, GIVE_CELL_LIFE);
             AND_WHEN("updateState() is run") {
                 cell2.updateState();
-                THEN("the cell should not be alive because it is a rim cell") {
-                    REQUIRE_FALSE(cell.isAlive());
-                }
-                THEN("the cells age should not have been incremented be 0") {
+                THEN("the cells age should not have been incremented and be 0") {
                     REQUIRE(cell.getAge() == 0);
                 }
             }
