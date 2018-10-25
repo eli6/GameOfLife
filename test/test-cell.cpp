@@ -183,23 +183,22 @@ SCENARIO("We test that updateState() change the cell as expected") {
 
 
             THEN("update cell should not change the color") {
-
                 //update the cells state.
                 cell.updateState();
-
-                //action was set to do nothing, so color, value and age should be the same as before.
-                AND_THEN("cells color should be the same") {
-                    REQUIRE(oldColor == cell.getColor());
-                }
-
-                AND_THEN("the cells value should be the same as well") {
-                    REQUIRE(oldValue == cell.getCellValue());
-                }
-
-                AND_THEN("the age should also be the same") {
-                    REQUIRE(formerAge == cell.getAge());
-                }
             }
+            //action was set to do nothing, so color, value and age should be the same as before.
+            THEN("cells color should be the same") {
+                REQUIRE(oldColor == cell.getColor());
+            }
+
+            THEN("the cells value should be the same as well") {
+                REQUIRE(oldValue == cell.getCellValue());
+            }
+
+            THEN("the age should also be the same") {
+                REQUIRE(formerAge == cell.getAge());
+            }
+
         }
 
         AND_WHEN("the nextGenerationAction is set to IGNORE_CELL") {  //testing action IGNORE_CELL
@@ -220,26 +219,29 @@ SCENARIO("We test that updateState() change the cell as expected") {
                     REQUIRE(oldColor == cell.getColor());
                 }
             }
+
             AND_WHEN("we change the update color") {
                 cell.setNextColor(COLOR::BLACK);
                 AND_WHEN("we also set the next update value") {
                     cell.setNextCellValue('X');
-                    THEN("after the next update. nextGenerationAction should firsthave been reset to DO_NOTHING") {
+                    AND_WHEN("updateState() is run") {
                         cell.updateState();
-                        REQUIRE(cell.getNextGenerationAction() == DO_NOTHING);
-                        AND_THEN("the color should have changed to black") {
+                        THEN("after the next update. nextGenerationAction should firsthave been reset to DO_NOTHING"){
+                            REQUIRE(cell.getNextGenerationAction() == DO_NOTHING);
+                        }
+                        THEN("the color should have changed to black") {
                             REQUIRE(cell.getColor() == COLOR::BLACK);
                         }
-                        AND_THEN("the value should have changed") {
+                        THEN("the value should have changed") {
                             REQUIRE(cell.getCellValue() == 'X');
                         }
+
                     }
 
                 }
             }
-
-
         }
+
         AND_WHEN("nextGenerationAction is set to KILL_CELL") { //TESTING ACTION KILL_CELL
             cell.setNextGenerationAction(KILL_CELL);
             AND_WHEN("updateState() is run") {
