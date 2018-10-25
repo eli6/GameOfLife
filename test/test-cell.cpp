@@ -133,7 +133,7 @@ SCENARIO("We test that correct values are set for the next generation") {
             THEN("it should be dead next") {
                 REQUIRE_FALSE(cell.isAliveNext());
             }
-            WHEN("it is reset to be alive next generation") {
+            AND_WHEN("it is reset to be alive next generation") {
                 cell.setIsAliveNext(true);
                 THEN("it should again be alive next") {
                     REQUIRE(cell.isAliveNext());
@@ -149,14 +149,17 @@ SCENARIO("We test that correct values are set for the next generation") {
                 AND_WHEN(
                         "the cells next action is set to GIVE_CELL_LIFE instead of DO_NOTHING so that the updateState() switch is activated") {
                     cell.setNextGenerationAction(GIVE_CELL_LIFE);
-                    AND_THEN("the cells state is updated so the color and value are set")cell.updateState();
-                    AND_THEN("the cell is updated again to its 'next' state") {
+                    AND_WHEN("the cells state is updated so the next color and value are set") {
                         cell.updateState();
-                        THEN("its next cell value should be M") {
-                            REQUIRE(cell.getCellValue() == 'M');
-                        }
-                        THEN("its color should be cyan") {
-                            REQUIRE(cell.getColor() == COLOR::CYAN);
+
+                        AND_WHEN("the cell is updated again to its 'next' state") {
+                            cell.updateState();
+                            THEN("its next cell value should be M") {
+                                REQUIRE(cell.getCellValue() == 'M');
+                            }
+                            THEN("its color should be cyan") {
+                                REQUIRE(cell.getColor() == COLOR::CYAN);
+                            }
                         }
                     }
 
@@ -201,27 +204,28 @@ SCENARIO("We test that updateState() change the cell as expected, as well as tes
         WHEN("the nextGenerationAction is set to DO_NOTHING") { //testing action DO_NOTHING
             cell.setNextGenerationAction(DO_NOTHING);
 
-
-            THEN("update cell should not change the color") {
-                //update the cells state.
+            AND_WHEN("we update the state"){
+                //update the cells state
                 cell.updateState();
+
+                THEN("cells color should be the same") {
+                    REQUIRE(oldColor == cell.getColor());
+                }
+
+                THEN("the cells value should be the same as well") {
+                    REQUIRE(oldValue == cell.getCellValue());
+                }
+
+                THEN("the age should also be the same") {
+                    REQUIRE(formerAge == cell.getAge());
+                }
             }
             //we set no nextUpdate values for color and value, so color and valuu should be the same as before.
-            THEN("cells color should be the same") {
-                REQUIRE(oldColor == cell.getColor());
-            }
 
-            THEN("the cells value should be the same as well") {
-                REQUIRE(oldValue == cell.getCellValue());
-            }
-
-            THEN("the age should also be the same") {
-                REQUIRE(formerAge == cell.getAge());
-            }
 
         }
 
-        AND_WHEN("the nextGenerationAction is set to IGNORE_CELL") {  //testing action IGNORE_CELL
+        WHEN("the nextGenerationAction is set to IGNORE_CELL") {  //testing action IGNORE_CELL
             cell.setNextGenerationAction(IGNORE_CELL);
             AND_WHEN("updateState() is run") {
                 cell.updateState();
@@ -266,7 +270,7 @@ SCENARIO("We test that updateState() change the cell as expected, as well as tes
         }
 
 
-        AND_WHEN("nextGenerationAction is set to KILL_CELL") { //TESTING ACTION KILL_CELL
+        WHEN("nextGenerationAction is set to KILL_CELL") { //TESTING ACTION KILL_CELL
             cell.setNextGenerationAction(KILL_CELL);
             AND_WHEN("updateState() is run") {
                 cell.updateState();
