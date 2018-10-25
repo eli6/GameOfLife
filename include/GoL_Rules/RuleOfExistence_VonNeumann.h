@@ -25,7 +25,11 @@ private:
 public:
     /**
      * @brief Constructor for a vonNeumann-Rule of Existence.
-     * @details Very similar to Conwways rule, except that only cardinal directions are used. PopulationLimits are set as: UNDERPOPULATION	< 2*	**Cell dies of loneliness** | OVERPOPULATION
+     * @details Very similar to Conwways rule, except that only cardinal directions are used.
+     * PopulationLimits are set as:
+     * - UNDERPOPULATION	< 2
+     * - OVERPOPULATION   > 3
+     * - RESURRECTION     = 3
      *
      * @param cells Map of cells and their points.
      */
