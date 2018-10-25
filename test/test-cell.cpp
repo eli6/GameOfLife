@@ -1,5 +1,5 @@
 /**
-* @file
+* @file Cell.h
  * @author
  * @author Elin Fritiofsson
  * @author Fredrik Arhusiander
@@ -141,7 +141,7 @@ SCENARIO("We test that correct values are set for the next generation") {
             }
         }
 
-        //TESTING setNextColor() AND setNextCellValue()
+        //TESTING setNextColor(), setNextCellValue(), getCellValue(), getColor()
         WHEN("its next update character is set to 'M'") {
             cell.setNextCellValue('M');
             AND_WHEN("its next color is set to cyan") {
@@ -169,12 +169,24 @@ SCENARIO("We test that correct values are set for the next generation") {
     }
 }
 
+SCENARIO("we test setting and getting of nextGenerationAction"){
+    GIVEN("a cell"){
+        Cell cell;
+        WHEN("we set next GenerationAction to GIVE_CELL_LIFE"){
+            cell.setNextGenerationAction(GIVE_CELL_LIFE);
+            THEN("nextGenerationAction should have that value"){
+                REQUIRE(cell.getNextGenerationAction() == GIVE_CELL_LIFE);
+            }
+        }
+    }
+}
+
 /***********************************
- * TESTING OF updateState()
+ * TESTING OF updateState().
  ***********************************/
 
 
-SCENARIO("We test that updateState() change the cell as expected") {
+SCENARIO("We test that updateState() change the cell as expected, as well as testing the relevant getters()") {
 
     GIVEN("a default cell") {
         Cell cell;
