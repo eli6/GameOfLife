@@ -48,9 +48,6 @@ SCENARIO("We create a Cell object using different constructor parameters") {
         THEN("it should be a non-rim cell") {
             REQUIRE_FALSE(cell.isRimCell());
         }
-        THEN("It should be alive") {
-            REQUIRE(cell.isAlive());
-        }
         THEN("The member color should be STATE_COLORS.LIVING") {
             REQUIRE(cell.getColor() == STATE_COLORS.LIVING);
         }
@@ -77,10 +74,6 @@ SCENARIO("We create a Cell object using different constructor parameters") {
     //TESTING CONSTRUCTOR WITH ACTION=KILL_CELL
     GIVEN("A Cell object with action = KILL_CELL") {
         Cell cell(false, KILL_CELL);
-
-        THEN("It should be dead") {
-            REQUIRE_FALSE(cell.isAlive());
-        }
         THEN("The member color should be STATE_COLORS.DEAD") {
             REQUIRE(cell.getColor() == STATE_COLORS.DEAD);
         }
@@ -93,9 +86,6 @@ SCENARIO("We create a Cell object using different constructor parameters") {
         Cell cell(true);
         THEN("it should be a rim cell") {
             REQUIRE(cell.isRimCell());
-        }
-        THEN("It should not yet be alive") {
-            REQUIRE_FALSE(cell.isAlive());
         }
         THEN("The member color should be STATE_COLORS.DEAD") {
             REQUIRE(cell.getColor() == STATE_COLORS.DEAD);
@@ -110,10 +100,28 @@ SCENARIO("We create a Cell object using different constructor parameters") {
      * TESTING OF OTHER PUBLIC MEMBER FUNCTIONS
      ***********************************/
 
-    //to be tested
-   // THEN("It should not yet be alive") {
-     //   REQUIRE_FALSE(cell.isAlive());
-    //}
+//TESTING isAlive()
+SCENARIO("we test isAlive()"){
+    GIVEN("a non-rim cell"){
+        Cell cell(false, KILL_CELL);
+        WHEN("we update its state"){
+            cell.updateState();
+            THEN("it should be dead"){
+                REQUIRE_FALSE(cell.isAlive());
+            }
+            AND_WHEN("we set nextGenerationAction to give the cell life"){
+                cell.setNextGenerationAction(GIVE_CELL_LIFE);
+                AND_WHEN("we update the state"){
+                    cell.updateState();
+                    THEN("it should be alive"){
+                        REQUIRE(cell.isAlive());
+                    }
+                }
+            }
+        }
+    }
+}
+
 SCENARIO("We test that correct values are set for the next generation") {
     //TESTING "NEXT GENERATION" VALUES
     GIVEN("a default cell") {
