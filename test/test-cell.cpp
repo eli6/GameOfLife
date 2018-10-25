@@ -220,27 +220,26 @@ SCENARIO("We test that updateState() change the cell as expected") {
                 }
             }
 
-            AND_WHEN("we change the update color") {
+            AND_WHEN("we change the update color and set the next value") {
                 cell.setNextColor(COLOR::BLACK);
-                AND_WHEN("we also set the next update value") {
-                    cell.setNextCellValue('X');
-                    AND_WHEN("updateState() is run") {
-                        cell.updateState();
-                        THEN("after the next update. nextGenerationAction should firsthave been reset to DO_NOTHING"){
-                            REQUIRE(cell.getNextGenerationAction() == DO_NOTHING);
-                        }
-                        THEN("the color should have changed to black") {
-                            REQUIRE(cell.getColor() == COLOR::BLACK);
-                        }
-                        THEN("the value should have changed") {
-                            REQUIRE(cell.getCellValue() == 'X');
-                        }
-
+                cell.setNextCellValue('X');
+                AND_WHEN("updateState() is run") {
+                    cell.updateState();
+                    THEN("after the next update. nextGenerationAction should firsthave been reset to DO_NOTHING"){
+                        REQUIRE(cell.getNextGenerationAction() == DO_NOTHING);
+                    }
+                    THEN("the color should have changed to black") {
+                        REQUIRE(cell.getColor() == COLOR::BLACK);
+                    }
+                    THEN("the value should have changed") {
+                        REQUIRE(cell.getCellValue() == 'X');
                     }
 
                 }
+
             }
         }
+
 
         AND_WHEN("nextGenerationAction is set to KILL_CELL") { //TESTING ACTION KILL_CELL
             cell.setNextGenerationAction(KILL_CELL);
