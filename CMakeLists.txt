@@ -3,7 +3,7 @@ project(GameOfLife)
 
 set(CMAKE_CXX_STANDARD 11)
 
-include_directories($ENV{TOOLS_INCLUDE} ${CMAKE_SOURCE_DIR}/include)
+include_directories($ENV{TOOLS_INCLUDE} ${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/test)
 
 # Add terminal sub directory
 add_subdirectory(terminal)
