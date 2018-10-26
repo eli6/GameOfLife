@@ -27,6 +27,8 @@ SCENARIO("Testing executeRule()"){
         //We declare the objects needed for testing
         // we need 8 points to create the 8 neighbors
 
+        //TODO reformulate using catch.
+
         map<Point, Cell> cells;
 
         int living = 0;
@@ -61,8 +63,14 @@ SCENARIO("Testing executeRule()"){
 
 
             for (auto it=cells.begin(); it!=cells.end(); ++it) {
+
+                //TODO test this using cell in the middle and generate 1-8 neighbors.
+                //using my test function to count neighbors (but we havent tested the function!!)
                 int aliveNeighbors = conway->countAlive(it->first);
                 Cell cell;
+
+                //TODO test this somehow.
+                //using test function to get a cell again (this also isn't tested)
                 cell = conway->getCellAtPosition(it->first);
 
                 //now we dont want any rim cells to be alive
@@ -70,7 +78,8 @@ SCENARIO("Testing executeRule()"){
                     REQUIRE_FALSE(cell.isAlive());
                 }
 
-                //for the other cells, only the cells with 3 neigbours should be alive.
+                //testing if populationLimits work as expected.
+                //TODO consider if this indirectly just tests getAction.
                 if (!cell.isRimCell()) {
                     if (aliveNeighbors < 2) {
                         cell.setNextGenerationAction(KILL_CELL);
