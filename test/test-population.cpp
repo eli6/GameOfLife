@@ -8,6 +8,7 @@
 
 #include "catch.hpp"
 #include "Cell_Culture/Population.h"
+#include <typeinfo>
 
 SCENARIO("A population of cells") {
     GIVEN("We create a population") {
@@ -52,10 +53,17 @@ SCENARIO("A population of cells") {
             /*
              * Testing getCellAtPosition()
              */
+            THEN("The function should return a Cell object") {
+                string obj = typeid(population.getCellAtPosition(Point{0,0})).name();
+                REQUIRE(obj == "Cell");
+            }
 
             /*
              * getTotalCellPopulation()
              */
+            THEN("The cellpopulation should be the same as the world dimensions") {
+                REQUIRE(population.getTotalCellPopulation() == WORLD_DIMENSIONS.HEIGHT * WORLD_DIMENSIONS.WIDTH);
+            }
 
 
         }
