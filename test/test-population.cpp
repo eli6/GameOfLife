@@ -20,11 +20,19 @@ SCENARIO("A population of cells") {
             THEN("There should be a cell population") {
                 REQUIRE(population.getTotalCellPopulation() > 0);
             }
-            // Testing calculateNewGeneration()
+            /*
+             * Testing calculateNewGeneration()
+             */
             THEN("The member generation should be set to 1") {
                 REQUIRE(population.calculateNewGeneration() == 1);
             }
+
+            
+
         }
+        /*
+         * Testing to initiate with different rule name combinations
+         */
         WHEN("We initiate the population with the rule 'erik'") {
             population.initiatePopulation("erik");
             THEN("There should be a cell population") {
@@ -32,9 +40,22 @@ SCENARIO("A population of cells") {
             }
         }
         WHEN("We initiate the population with the rule 'von_neumann'") {
-            population.initiatePopulation("on_neumann");
+            population.initiatePopulation("von_neumann");
             THEN("There should be a cell population") {
                 REQUIRE(population.getTotalCellPopulation() > 0);
+            }
+        }
+        WHEN("We initiate population with two rule names") {
+            vector<string> v{"conway", "erik", "von_neumann"};
+            for(int i = 0; i < 3; i++) {
+                for(int j = 0; j < 3; j++) {
+                    if(i!=j) { // to only test when the rule names differ
+                        population.initiatePopulation(v[i], v[j]);
+                        THEN("There should be a cell population") {
+                            REQUIRE(population.getTotalCellPopulation() > 0);
+                        }
+                    }
+                }
             }
         }
     }
