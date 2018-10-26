@@ -35,34 +35,39 @@ SCENARIO("A population of cells") {
                 int row = 0;
                 int column = 0;
                 Cell* testCell = nullptr; // create a pointer to a Cell object
-                do {
+                while(!(row <= WORLD_DIMENSIONS.HEIGHT + 1 | column <= WORLD_DIMENSIONS.WIDTH + 1)) { // stays within world borders
                     testCell = &population.getCellAtPosition(Point{column, row}); // get reference to a cell
+                    if(!testCell->isRimCell() && !testCell->isAlive() && testCell->getNextGenerationAction() == GIVE_CELL_LIFE)
+                        break; // break if criteria is met
                     row++;
                     column++;
-                    if(row <= WORLD_DIMENSIONS.HEIGHT + 1 | column <= WORLD_DIMENSIONS.WIDTH + 1) // exit loop if it goes outside of the world dimensions
-                        break;
-                } while (!(!testCell->isAlive() && testCell->getNextGenerationAction() == GIVE_CELL_LIFE)); // test until it fulfills criteria
+                }
+                /*
+                 * @bug false is returned
+                 */
                 AND_WHEN("We call the function") {
                     population.calculateNewGeneration();
                     THEN("The cell should be alive") {
                         REQUIRE(testCell->isAlive());
                     }
                 }
-            }
 
-            /*
-             * Testing getCellAtPosition()
-             */
-            THEN("The function should return a Cell object") {
-                string obj = typeid(population.getCellAtPosition(Point{0,0})).name();
-                REQUIRE(obj == "Cell");
+                /*
+                 *  Testing getCellAtPosition()
+                 */
+                AND_WHEN("We update state and call getCellAtPosition()") {
+                    testCell->updateState();
+                    THEN("We should get a Cell that is alive at the same position") {
+                        REQUIRE(population.getCellAtPosition(Point{column,row}).isAlive());
+                    }
+                }
             }
 
             /*
              * getTotalCellPopulation()
              */
             THEN("The cellpopulation should be the same as the world dimensions") {
-                REQUIRE(population.getTotalCellPopulation() == WORLD_DIMENSIONS.HEIGHT * WORLD_DIMENSIONS.WIDTH);
+                REQUIRE(population.getTotalCellPopulation() == (WORLD_DIMENSIONS.HEIGHT +2) * (WORLD_DIMENSIONS.WIDTH +2) );
             }
 
 
