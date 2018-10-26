@@ -34,7 +34,7 @@ SCENARIO("Testing executeRule()"){
         int living = 0;
 
         //we create 8 scenarios with j+1 number of living cells.
-        for(int j=0; j < 8; j++) {
+        for(int j=0; j < 9; j++) {
             //count how many living cells we produce since we want to test 1-8 living cells in our matrix
             int counter = 0;
             //we generate a small 5x5 cell population to test executeRule()
@@ -64,12 +64,22 @@ SCENARIO("Testing executeRule()"){
 
             for (auto it=cells.begin(); it!=cells.end(); ++it) {
 
-                //TODO test this using cell in the middle and generate 1-8 neighbors.
-                //using my test function to count neighbors (but we havent tested the function!!)
+                //TESTING counting of neighbors using cell in the middle of matrix.
+                Cell middleCell = conway->getCellAtPosition({2,2});
+
+                //if we have produced less than 5 cells, all those cells are the middle cell's neighbors
+                if(counter < 5){
+                    REQUIRE(conway->countAlive({2,2}) == counter);
+                    //if we have produced 5 living cells, the middle cell is one of them, so we subtract it from the neighbor count.
+
+                } else {
+                    REQUIRE(conway->countAlive({2,2}) == counter-1);
+                }
+
                 int aliveNeighbors = conway->countAlive(it->first);
                 Cell cell;
 
-                //TODO test this somehow.
+                //TODO test this?.
                 //using test function to get a cell again (this also isn't tested)
                 cell = conway->getCellAtPosition(it->first);
 
