@@ -16,7 +16,42 @@
 * TESTING CONSTRUCTOR WITH DIFFERENT PARAMETERS
 ***********************************/
 SCENARIO("Testing constructor"){
+    GIVEN("a small cell population"){
+        Point point1, point2;
+        Cell cell1(false);
+        Cell cell2(true);
+        map<Point,Cell> cells;
 
+        cells[point1] = cell1;
+        cells[point2] = cell2;
+
+        WHEN("we initialize our rule with these cells"){
+            auto conway = new RuleOfExistence_Conway(cells);
+            THEN("we should be able to retrive the first, non-rim cell"){
+                REQUIRE_FALSE(conway->getCellAtPosition(point1).isRimCell());
+            }
+            THEN("we should also be able to retrieve the second, which is a rim cell"){
+                REQUIRE(conway->getCellAtPosition(point2).isRimCell());
+
+            }
+            THEN("it should have the right population limits set"){
+                REQUIRE(conway->getPopLimits().UNDERPOPULATION == 2);
+                REQUIRE(conway->getPopLimits().OVERPOPULATION == 3);
+                REQUIRE(conway->getPopLimits().RESURRECTION == 3);
+
+            }
+
+            THEN("it should have directions set to all directions"){
+                //TODO check this
+
+
+            }
+
+            THEN("its rule name should be 'conway'"){
+                REQUIRE (conway->getRuleName() == "conway");
+            }
+        }
+    }
 }
 
 
@@ -28,6 +63,7 @@ SCENARIO("Testing constructor"){
 SCENARIO("Testing executeRule()"){
     GIVEN("a Conway Rule of Existence") {
 
+
         //We declare the objects needed for testing
         // we need 8 points to create the 8 neighbors
 
@@ -35,10 +71,8 @@ SCENARIO("Testing executeRule()"){
         WHEN("we create a test cell population of 5x5 cells and create 1-8 neighbours for the middle cell in a for loop") {
             for (int j = 0; j < 9; j++) {
 
-
                 map<Point, Cell> cells;
                 //int living = 0;
-
 
                 //count how many living cells we produce since we want to test 1-8 living cells in our matrix
                 int counter = 0;
@@ -66,16 +100,21 @@ SCENARIO("Testing executeRule()"){
                 }
 
 
+
+
                 //we wrap this in a DYNAMIC_SECTION so that it can be looped.
                 DYNAMIC_SECTION( "Looped section " << j) {
                     AND_WHEN("we initiate a new RuleOfExistence_Conway instance with the above cells and get the position of the cell int he middle") {
                         auto *conway = new RuleOfExistence_Conway(cells);
+                        Cell rim = conway->getCellAtPosition({0,0});
+                        REQUIRE(rim.isRimCell());
                         //TODO test that rimCells aren't counted, using a different cell.
                         //TESTING counting of neighbors using cell in the middle of matrix.
                         Point middleCellPosition = {2, 2};
                         int neighbours = 0;
 
-
+                        //TODO put this in specific test, other tings in general test? needed for this:
+                        //only this is specifc to conway-directions, other rules may only detect 4 out of 8 neighbors.
                         THEN("the middle cell should have j or j-1 neighbours") {
                             //if we have produced less than 5 cells, all those cells are the middle cell's living neighbors
                             if (counter < 5) {
