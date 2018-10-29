@@ -15,8 +15,8 @@ of the simulation, and determines the fate of each cell in the world population.
 #include<string>
 #include<map>
 #include<vector>
-#include "Cell_Culture/Cell.h"
-#include "Support/Globals.h"
+#include "../Cell_Culture/Cell.h"
+#include "../Support/Globals.h"
 using namespace std;
 
 
@@ -53,21 +53,29 @@ implements their logic based on the virtual method executeRule().
  */
 class RuleOfExistence {
 protected:
-    string ruleName;
 
-    // Reference to the population of cells
-    map<Point, Cell>& cells;
+
+
 
     // Amounts of alive neighbouring cells, with specified limits
     const PopulationLimits POPULATION_LIMITS;
 
+    // Reference to the population of cells
+    map<Point, Cell>& cells;
+
     // The directions, by which neighbouring cells are identified
     const vector<Directions>& DIRECTIONS;
 
+    string ruleName;
+
     int countAliveNeighbours(Point currentPoint);
-    ACTION getAction(int aliveNeighbours, bool isAlive);
 
 public:
+    //made public for testing
+    ACTION getAction(int aliveNeighbours, bool isAlive);
+    //for testing
+    PopulationLimits getPopLimits(){ return POPULATION_LIMITS; }
+    const vector<Directions>& getDirections() { return DIRECTIONS; }
     /**
      * @brief Constructor for a rule of existence. Used by derived classes.
      * @details The parameters sets values for population limit values (values for under- /overpopulation etc.),
