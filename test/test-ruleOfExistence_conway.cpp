@@ -7,7 +7,7 @@
  * @brief Contains all the tests for the Cell class constructor
 */
 
-#include <catch.hpp>
+#include "catch2.hpp"
 #include <iostream>
 #include "../include/GoL_Rules/RuleOfExistence_Conway.h"
 
@@ -19,6 +19,9 @@ SCENARIO("Testing constructor"){
 
 }
 
+
+
+
 /***********************************
 * TESTING EXECUTE RULE AND DEPENDENT FUNCTIONS
 ***********************************/
@@ -28,15 +31,15 @@ SCENARIO("Testing executeRule()"){
         //We declare the objects needed for testing
         // we need 8 points to create the 8 neighbors
 
-        //TODO reformulate using catch.
-
+        //we create 8 scenarios with j+1 number of living cells.
         WHEN("we create a test cell population of 5x5 cells and create 1-8 neighbours for the middle cell in a for loop") {
-
-            map<Point, Cell> cells;
-            int living = 0;
-
-            //we create 8 scenarios with j+1 number of living cells.
             for (int j = 0; j < 9; j++) {
+
+
+                map<Point, Cell> cells;
+                //int living = 0;
+
+
                 //count how many living cells we produce since we want to test 1-8 living cells in our matrix
                 int counter = 0;
                 //we generate a small 5x5 cell population
@@ -63,86 +66,98 @@ SCENARIO("Testing executeRule()"){
                 }
 
 
+                //we wrap this in a DYNAMIC_SECTION so that it can be looped.
+                DYNAMIC_SECTION( "Looped section " << j) {
+                    AND_WHEN("we initiate a new RuleOfExistence_Conway instance with the above cells and get the position of the cell int he middle") {
+                        auto *conway = new RuleOfExistence_Conway(cells);
+                        //TODO test that rimCells aren't counted, using a different cell.
+                        //TESTING counting of neighbors using cell in the middle of matrix.
+                        Point middleCellPosition = {2, 2};
+                        int neighbours = 0;
 
 
+                        THEN("the middle cell should have j or j-1 neighbours") {
+                            //if we have produced less than 5 cells, all those cells are the middle cell's living neighbors
+                            if (counter < 5) {
+                                neighbours = conway->countAlive(middleCellPosition);
+                                REQUIRE(neighbours == counter);
 
-                AND_WHEN("we initiate a new RuleOfExistence_Conway instance with the above cells and get the position of the cell int he middle") {
-                    auto *conway = new RuleOfExistence_Conway(cells);
-                    //TODO test that rimCells aren't counted, using a different cell.
-                    //TESTING counting of neighbors using cell in the middle of matrix.
-                    Point middleCellPosition = {2, 2};
-                    int neighbours = 0;
-
-
-                    THEN("the middle cell should have j or j-1 neighbours") {
-                        //if we have produced less than 5 cells, all those cells are the middle cell's living neighbors
-                        if (counter < 5) {
-                            neighbours = conway->countAlive(middleCellPosition);
-                            REQUIRE(neighbours == counter);
-
-                        } else {
-                            neighbours = conway->countAlive(middleCellPosition);
-                            //if we have produced 5 living cells, the middle cell is one of them and won't be counted by "countAlive", so we subtract it from the counter.
-                            REQUIRE(neighbours == counter - 1);
-                        }
-
-
-                        //depending on this neighbour value, the correct action should be taken.
-                        AND_THEN("the correct action should be taken for the middle cell depending on number of living neighbours") {
-
-                            if (neighbours < conway->getPopLimits().UNDERPOPULATION) {
-                                THEN("getAction should return KILL_CELL") {
-                                    REQUIRE(conway->getAction(neighbours, true) == KILL_CELL);
-                                    AND_WHEN("we set the action for the middle cell and update the state") {
-                                        Cell cell = conway->getCellAtPosition(middleCellPosition);
-                                        cell.setNextGenerationAction(KILL_CELL);
-                                        cell.updateState();
-                                        THEN("the cell should be dead") {
-                                            REQUIRE_FALSE(cell.isAlive());
-                                        }
-                                    }
-
-                                }
-                            } else if (neighbours > conway->getPopLimits().OVERPOPULATION) {
-                                THEN("getAction should return KILL_CELL") {
-                                    REQUIRE(conway->getAction(neighbours, true) == KILL_CELL);
-                                    AND_WHEN("we set the action for the middle cell and update the state") {
-                                        Cell cell = conway->getCellAtPosition(middleCellPosition);
-                                        cell.setNextGenerationAction(KILL_CELL);
-                                        cell.updateState();
-                                        THEN("the cell should be dead") {
-                                            REQUIRE_FALSE(cell.isAlive());
-                                        }
-                                    }
-
-                                }
-
-                            } else if (neighbours == conway->getPopLimits().RESURRECTION) {
-                                THEN("getAction should return GIVE_CELL_LIFE") {
-                                    REQUIRE(conway->getAction(neighbours, true) == GIVE_CELL_LIFE);
-                                    AND_WHEN("we set the action for the middle cell and update the state") {
-                                        Cell cell = conway->getCellAtPosition(middleCellPosition);
-                                        cell.setNextGenerationAction(GIVE_CELL_LIFE);
-                                        cell.updateState();
-                                        THEN("the cell should be dead") {
-                                            REQUIRE(cell.isAlive());
-                                        }
-                                    }
-
-                                }
-
+                            } else {
+                                neighbours = conway->countAlive(middleCellPosition);
+                                //if we have produced 5 living cells, the middle cell is one of them and won't be counted by "countAlive", so we subtract it from the counter.
+                                REQUIRE(neighbours == counter - 1);
                             }
+
+
+                            //depending on this neighbour value, the correct action should be taken.
+                            AND_THEN("the correct action should be taken for the middle cell depending on number of living neighbours") {
+                                if (neighbours < conway->getPopLimits().UNDERPOPULATION) {
+                                    std::cout << "underpopulated!!" << std::endl;
+
+                                    THEN("getAction should return KILL_CELL") {
+                                        REQUIRE(conway->getAction(neighbours, true) == KILL_CELL);
+                                        AND_WHEN("we set the action for the middle cell and update the state") {
+                                            Cell cell = conway->getCellAtPosition(middleCellPosition);
+                                            cell.setNextGenerationAction(KILL_CELL);
+                                            cell.updateState();
+                                            THEN("the cell should be dead") {
+                                                REQUIRE_FALSE(cell.isAlive());
+                                            }
+                                        }
+
+                                    }
+                                } else if (neighbours > conway->getPopLimits().OVERPOPULATION) {
+                                    std::cout << "overpopulated!!" << std::endl;
+                                    THEN("getAction should return KILL_CELL") {
+                                        REQUIRE(conway->getAction(neighbours, true) == KILL_CELL);
+                                        AND_WHEN("we set the action for the middle cell and update the state") {
+                                            Cell cell = conway->getCellAtPosition(middleCellPosition);
+                                            cell.setNextGenerationAction(KILL_CELL);
+                                            cell.updateState();
+                                            THEN("the cell should be dead") {
+                                                REQUIRE_FALSE(cell.isAlive());
+                                            }
+                                        }
+
+                                    }
+
+                                } else if (neighbours == conway->getPopLimits().RESURRECTION) {
+                                    std::cout << "resurrection!!" << std::endl;
+
+                                    THEN("getAction should return GIVE_CELL_LIFE if our cell is dead, otherweise it should return GIVE CELL LIFE") {
+                                        Cell cell = conway->getCellAtPosition(middleCellPosition);
+                                        if(cell.isAlive()){
+                                            REQUIRE(conway->getAction(neighbours, true) == IGNORE_CELL);
+
+                                        } else {
+                                            REQUIRE(conway->getAction(neighbours, false) == GIVE_CELL_LIFE);
+                                            AND_WHEN("we set the action for the middle cell and update the state") {
+                                                cell.setNextGenerationAction(GIVE_CELL_LIFE);
+                                                cell.updateState();
+                                                THEN("the cell should be alive") {
+                                                    REQUIRE(cell.isAlive());
+                                                }
+                                            }
+                                        }
+
+
+
+                                    }
+
+                                }
+                            }
+
+
                         }
 
-
+                        }
                     }
-
                 }
             }
 
         }
     }
 
-    }
+
 
 
