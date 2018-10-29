@@ -57,6 +57,29 @@ public:
      * @test Test that this method sets correct cell colors for different neighbor scenarios.
      */
     void executeRule();
+
+
+    /** TEST FUNCTION
+     * @brief Gives the number of alive neighbors aftr each rule execution.
+     * @details Useful for testing if executeRule() counts alive neighbors correctly.
+     *
+     */
+    /**
+     * @brief Returns cell by specified Point value.
+     * @param position A Point data type
+     * @return A reference to a Cell object
+     */
+    Cell& getCellAtPosition(Point position) { return cells.at(position); }
+
+    //test func
+    int countAlive(Point aPoint){
+        Cell cell = getCellAtPosition(aPoint);
+        if(!cell.isRimCell()){
+            int aliveN = countAliveNeighbours(aPoint);
+            return aliveN;
+        }
+
+    }
 };
 
 #endif //GAMEOFLIFE_RULEOFEXISTENCE_CONWAY_H
