@@ -78,6 +78,7 @@ public:
             int aliveN = countAliveNeighbours(aPoint);
             return aliveN;
         }
+        return 0;
 
     }
 };
