@@ -108,12 +108,10 @@ SCENARIO("Testing constructor"){
                                 "we initiate a new RuleOfExistence_Conway instance with the above cells and get the position of the cell int he middle") {
                             auto *conway = new RuleOfExistence_Conway(cells);
 
-                            //TODO test that rimCells aren't counted, using a different cell.
                             //TESTING counting of neighbors using cell in the middle of matrix.
                             Point middleCellPosition = {2, 2};
                             int neighbours = 0;
 
-                            //TODO put this in specific test, other tings in general test? needed for this:
                             //only this is specifc to conway-directions, other rules may only detect 4 out of 8 neighbors.
                             THEN("the middle cell should have j or j-1 neighbours") {
                                 //if we have produced less than 5 cells, all those cells are the middle cell's living neighbors
