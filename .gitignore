@@ -83,3 +83,5 @@ cmake-build-release/
 
 docs/html
 docs/latex
+
+test/*
