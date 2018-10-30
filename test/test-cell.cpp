@@ -1,6 +1,5 @@
 /**
 * @file Cell.h
- * @author
  * @author Elin Fritiofsson
  * @author Fredrik Arhusiander
  * @date 23 october 2018
