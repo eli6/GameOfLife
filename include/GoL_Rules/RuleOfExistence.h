@@ -53,12 +53,9 @@ implements their logic based on the virtual method executeRule().
  */
 class RuleOfExistence {
 protected:
-
-
-
-
     // Amounts of alive neighbouring cells, with specified limits
     const PopulationLimits POPULATION_LIMITS;
+
 
     // Reference to the population of cells
     map<Point, Cell>& cells;
@@ -67,6 +64,7 @@ protected:
     const vector<Directions>& DIRECTIONS;
 
     string ruleName;
+
 
     int countAliveNeighbours(Point currentPoint);
 
