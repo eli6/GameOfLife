@@ -39,9 +39,10 @@ SCENARIO("testing loadPopulationFromFile"){
 
                     REQUIRE(cells[{0, 9}].isRimCell());
                 }
-                /*THEN("CELL 19,9 should also be a rim cell (lower right corner)"){
+                //This also fails
+                THEN("CELL 19,9 should also be a rim cell (lower right corner)"){
                     REQUIRE(cells[{19, 9}].isRimCell());
-                }*/
+                }
 
                 THEN("We should be able to loop through the second row of cells and it should correspond to line 1 in our Population_Seed.txt"){
 
@@ -56,6 +57,7 @@ SCENARIO("testing loadPopulationFromFile"){
                                 int xValue = it->first.x;
                                 auto it = std::find(v.begin(), v.end(), xValue);
 
+                                //test fails
                                 //require returns 7 and not 6 if we correct the world dimensinos in fileLoader.cpp meaning the rim cell at the start of the row is mistakenly taken for a normal cell.
                                 //if we use the incorrect world dimension calculations dimensions +1, nothing is correct since a row with only zeroes (rim cells) is incorrectly used for line 2.
                                 REQUIRE(it!=v.end());
@@ -65,10 +67,10 @@ SCENARIO("testing loadPopulationFromFile"){
                 }
             }
             //this test fails because no exception is thrown, so I added a @bug.
-            /*AND_WHEN("we call file loader with a valid name but the file contains erroneous content"){
+            AND_WHEN("we call file loader with a valid name but the file contains erroneous content"){
                fileName = "../Population_Seed_With_Errors.txt";
                 REQUIRE_THROWS(fileLoader.loadPopulationFromFile(cells));
-            }*/
+            }
 
 
 
