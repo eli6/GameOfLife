@@ -50,12 +50,14 @@ private:
     bool optionExists(char** begin, char** end, const std::string& option);
 
     /**
-     * TODO this
-     * @brief gets the given option value
-     * @param begin
-     * @param end
-     * @param option
-     * @return
+     * @brief Gets the given option value
+     * @details Iterates over a string and returns the iterator itself if the value was found,
+     * otherwise it returns a nullptr.
+     * @param begin A pointer to a pointer to char for where to start the iteration
+     * @param end A pointer to a pointer to char for where to end the iteration
+     * @param option A reference to a string on which the iteration takes place
+     * @return A pointer to char that is the iterator if the value was found
+     * @test Check so a correct value is returned from different combinations of arguments
      */
     char* getOption(char** begin, char** end, const std::string& option);
 };

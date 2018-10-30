@@ -43,7 +43,7 @@ protected:
     const string argValue;
 
     /**
-     * @brief nform the user that no value was provided for the argument
+     * @brief Informs the user that no value was provided for the argument
      */
     void printNoValue();
 
@@ -72,6 +72,7 @@ public:
     /**
      * @brief Getter for the member 'argValue'
      * @return A reference to the string value 'argValue'
+     * @test It should return the correct value.
      */
     const string& getValue() { return argValue; }
 };
@@ -80,19 +81,16 @@ public:
  * @class HelpArgument
  * @brief Derived class from BaseArgument
  * @details sets the member argValue to '-h'.
+ * @test The constructor and member function should function properly
  */
 class HelpArgument : public BaseArgument {
 public:
     /**
-     * @brief The constructor sets the member in the base class argValue to '-h'.
-     * @test So that the value is set correctly to '-h'.
+     * @brief Constructor
+     * @test The correct letter should be set as argValue
      */
     HelpArgument() : BaseArgument("-h") {}
 
-    /**
-     * @brief Destructor
-     * @Test So that it functions correctly
-     */
     ~HelpArgument() {}
 
     /**
@@ -105,19 +103,19 @@ public:
 };
 
 /**
- * @brief Number of generations to simulate
- * TODO test
+ * @class GenerationArgument
+ * @brief Derived class from BaseArgument
+ * @details sets the member argValue to '-g'.
+ * @test The constructor and member function should function properly
  */
 class GenerationsArgument : public BaseArgument {
 public:
     /**
-     * @brief
+     * @brief Constructor
+     * @test The correct letter should be set as argValue
      */
     GenerationsArgument() : BaseArgument("-g") {}
 
-    /**
-     * @brief
-     */
     ~GenerationsArgument() {}
 
     /**
@@ -131,11 +129,17 @@ public:
 };
 
 /**
- * @class WorldsizeArgument
- * @brief Custom population size
+ * @class WorldSizeArgument
+ * @brief Derived class from BaseArgument
+ * @details sets the member argValue to '-s'.
+ * @test The constructor and member function should function properly
  */
 class WorldsizeArgument : public BaseArgument {
 public:
+    /**
+     * @brief Constructor
+     * @test The correct letter should be set as argValue
+     */
     WorldsizeArgument() : BaseArgument("-s") {}
     ~WorldsizeArgument() {}
 
@@ -148,40 +152,71 @@ public:
 };
 
 /**
- * @brief Initiate population from file
+ * @class FileArgument
+ * @brief Derived class from BaseArgument
+ * @details sets the member argValue to '-f'.
+ * @test The constructor and member function should function properly
  */
 class FileArgument : public BaseArgument {
 public:
+    /**
+     * @brief Constructor
+     * @test The correct letter should be set as argValue
+     */
     FileArgument() : BaseArgument("-f") {}
     ~FileArgument() {}
 
     /**
-     * @brief
-     * @param appValues
-     * @param fileNameArg
+     * @brief Sets the fileName
+     * @param appValues Reference to an ApplicationValues object
+     * @param fileNameArg A pointer to char
      */
     void execute(ApplicationValues& appValues, char* fileNameArg);
 };
 
 /**
- * @brief Rule used for even generations *
+ * @class EvenRuleArgument
+ * @brief Derived class from BaseArgument
+ * @details sets the member argValue to '-er'.
+ * @test The constructor and member function should function properly
  */
 class EvenRuleArgument : public BaseArgument {
 public:
+    /**
+     * @brief Constructor
+     * @test The correct letter should be set as argValue
+     */
     EvenRuleArgument() : BaseArgument("-er") {}
     ~EvenRuleArgument() {}
 
+    /**
+     * @brief Sets the appValues member evenRule
+     * @param appValues A reference to an ApplicatoinValues object
+     * @param oddRule A pointer to char
+     */
     void execute(ApplicationValues& appValues, char* evenRule);
 };
 
 /**
- * @brief Rule used for odd generations
+ * @class OddRuleArgument
+ * @brief Derived class from BaseArgument
+ * @details sets the member argValue to '-or'.
+ * @test The constructor and member function should function properly
  */
 class OddRuleArgument : public BaseArgument {
 public:
+    /**
+     * @brief Constructor
+     * @test The correct letter should be set as argValue
+     */
     OddRuleArgument() : BaseArgument("-or") {}
     ~OddRuleArgument() {}
 
+    /**
+     * @brief Sets the appValues member oddRuleName
+     * @param appValues A reference to an ApplicatoinValues object
+     * @param oddRule A pointer to char
+     */
     void execute(ApplicationValues& appValues, char* oddRule);
 };
 
