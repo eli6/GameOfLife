@@ -16,7 +16,7 @@
 #include <sstream>
 #include <string>
 
-sing namespace std;
+using namespace std;
 
 /**
  * @struct ApplicationValues
@@ -35,13 +35,16 @@ struct ApplicationValues {
 /**
  * @class BaseArgument
  * @brief Base class for argument classes
- * @test So that constructor and member functions do as they should
+ * @details The classes are used for giving arguments
+ * @test The constructor and member functions
  */
 class BaseArgument {
 protected:
     const string argValue;
 
-    // inform the user that no value was provided for the argument
+    /**
+     * @brief nform the user that no value was provided for the argument
+     */
     void printNoValue();
 
 public:
@@ -56,15 +59,13 @@ public:
 
     /**
      * @brief Virtual Destructor
-     * TODO how test virtual functions?
      */
     virtual ~BaseArgument() {}
 
     /**
-     * @brief A virtual function to execute the arguments
+     * @brief A virtual function used in the derived classes to execute the arguments
      * @param appValues A reference to an AppliactionValues instance
      * @param value A pointer to a char set to 'nullptr'
-     * TODO test virtual function?
      */
     virtual void execute(ApplicationValues& appValues, char* value = nullptr) = 0;
 
