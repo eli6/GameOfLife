@@ -34,6 +34,7 @@ public:
      * @details Uses the string variable fileName declared in Globals.h to try to open a file
      * with a try-catch block. An ios_base::failure exception is thrown if unsuccessful. If not,
      * the world dimensions are read from file and used to create a population of cells.
+     * @param cells A reference to an object of the type map<Point, Cell>
      * @test 1) That the file is opened when a correct filename is used 2) That an exception
      * is thrown when not 3) That the correct world size is read 4) That a population of cells is created.
      */
