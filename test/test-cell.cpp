@@ -39,7 +39,7 @@ SCENARIO("We create a Cell object using different constructor parameters") {
         THEN("It should have next action set to DO_NOTHING") {
             REQUIRE(cell.getNextGenerationAction() == DO_NOTHING);
         }
-    } //END OF CONSTRUCTOR TEST
+    }
 
     //TESTING CONSTRUCTOR WITH ACTION=GIVE_CELL_LIFE
     GIVEN("A cell object with action = GIVE_CELL_LIFE") {
@@ -290,7 +290,7 @@ SCENARIO("We test that updateState() change the cell as expected, as well as tes
             }
         }
 
-        AND_WHEN("nextGenerationAction is set to GIVE_CELL_LIFE") { //testing action GIVE_CELL_LIFE
+        WHEN("nextGenerationAction is set to GIVE_CELL_LIFE") { //testing action GIVE_CELL_LIFE
             cell.setNextGenerationAction(GIVE_CELL_LIFE);
             AND_WHEN("updateState() is run") {
                 cell.updateState();
@@ -311,7 +311,7 @@ SCENARIO("We test that updateState() change the cell as expected, as well as tes
             }
 
         }
-        AND_WHEN("a rim cell is configured with next generation action GIVE_CELL_LIFE") { //testing rim cell with action GIVE_CELL_LIFE
+        WHEN("a rim cell is configured with next generation action GIVE_CELL_LIFE") { //testing rim cell with action GIVE_CELL_LIFE
             Cell cell2(true, GIVE_CELL_LIFE);
             AND_WHEN("updateState() is run") {
                 cell2.updateState();
