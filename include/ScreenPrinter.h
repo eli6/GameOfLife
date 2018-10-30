@@ -42,7 +42,7 @@ public:
      * is done by std::cout and the Cell function getCellValue().
      * @param population A reference to a Population object.
      * @test It should print the correct colors, and it should print the color of every cell.
-     * @bug there is a \TODO in the function implementation.
+     * @bug there is something unfinished in the function implementation.
      */
     void printBoard(Population& population);
 
