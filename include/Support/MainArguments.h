@@ -97,6 +97,8 @@ public:
      * @brief Prints the help screen from ScreenPrinter
      * @param appValues An ApplicationValues object reference
      * @param value A pointer to a char
+     * @test The help screen should be printer through ScreenPrinter and the simulation
+     * should not run
      * @bug The parameter 'value' is never used
      */
     void execute(ApplicationValues& appValues, char* value);
@@ -121,9 +123,13 @@ public:
     /**
      * @brief Sets the number of generations
      * @details Sets the 'maxGenerations' member in ApplicationValues to what the
-     * parameter 'generations' points to
+     * parameter 'generations' points to, and prints a message onscreen if -g is
+     * used and no value is set. In that case the simulatino is not run.
      * @param appValues A reference to an ApplicationValues object
      * @param generations A pointer to a char
+     * @test The maxGenerations member should be set correctly. If a nullptr is passed then
+     * printNoValues() should be called and the simulation should not be run.
+     * @bug stoi() can throw an exception and should be put in a try/catch-clause.
      */
     void execute(ApplicationValues& appValues, char* generations);
 };
@@ -147,6 +153,9 @@ public:
      * @brief Sets the world dimensions using an istringstream object
      * @param appValues A reference to an ApplicationValues object
      * @param dimensions A pointer to a char
+     * @test The WORLD_DIMENSIONS should be read from the global value dimensions and
+     * if a nullpointer is passed instead then printNoValues() should be called and the
+     * simulation should not be run.
      */
     void execute(ApplicationValues& appValues, char* dimensions);
 };
@@ -167,9 +176,11 @@ public:
     ~FileArgument() {}
 
     /**
-     * @brief Sets the fileName
+     * @brief Sets the fileName through the second parameter
      * @param appValues Reference to an ApplicationValues object
      * @param fileNameArg A pointer to char
+     * @test fileName should be set by the char pointer and if a nullpointer is passed instead
+     * then printNoValues() should be called and the simulation should not be run.
      */
     void execute(ApplicationValues& appValues, char* fileNameArg);
 };
@@ -192,7 +203,9 @@ public:
     /**
      * @brief Sets the appValues member evenRule
      * @param appValues A reference to an ApplicatoinValues object
-     * @param oddRule A pointer to char
+     * @param evenRule A poiter to char
+     * @test evenRuleName should be set by the second argument and if a nullpointer is passed
+     * instead then printNoValues() should be called and the simulation should not be run.
      */
     void execute(ApplicationValues& appValues, char* evenRule);
 };
@@ -216,6 +229,8 @@ public:
      * @brief Sets the appValues member oddRuleName
      * @param appValues A reference to an ApplicatoinValues object
      * @param oddRule A pointer to char
+     * @test oddRuleName should be set by the second parameter and if a nullpointer is passed instead
+     * then printNoValues() should be called and the simulation should not be run.
      */
     void execute(ApplicationValues& appValues, char* oddRule);
 };
