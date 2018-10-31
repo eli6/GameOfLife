@@ -1,6 +1,6 @@
 /**
  * @file
- * @author Erik StrÃ¶m
+ * @author Erik Ström
  * @date October 2017
  * @version 0.1
  * @brief Contains the class ScreenPrinter
@@ -16,7 +16,7 @@
 #include "Cell_Culture/Population.h"
 
 /**
- * @class Cell
+ * @class ScreenPrinter
  * @brief Responsible for visually representing the simulation world on screen.
  * @test Test so that member functions do as they should
  */
@@ -37,7 +37,7 @@ public:
      * @brief Prints the population of cells to the screen
      * @details The function uses a for-loop to loop through the cells at each position
      * using the height and width of the world. For each cell it first checks so it's not
-     * a rim cell, then it gets the color,  pushes the color to the terminal, prints it
+     * a rim cell, then it gets the color,  sets the color in the terminal, prints it
      * to the screen, and finally resets the color for the next iteration. The printing
      * is done by std::cout and the Cell function getCellValue().
      * @param population A reference to a Population object.
@@ -48,6 +48,8 @@ public:
 
     /**
      * @brief Prints help screen
+     * @details The help screen contains information about the different arguments that can 
+     * be used when running the program.
      * @test The output is static so it should always print the same text.
      */
     void printHelpScreen();
