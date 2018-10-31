@@ -1,6 +1,6 @@
 /**
  * @file RuleOfExistence.h
- * @author Erik StrÃ¶m
+ * @author Erik Ström
  * @date October 2017
  * @version 0.1
  * @brief Rules of Existance for cells.
@@ -70,9 +70,27 @@ protected:
 
 public:
     //made public for testing
+    /** TEST FUNCTION
+    * @brief Gets the action depending on number of alive neighbours and state of cell itself.
+    * @details Made public for test purposes
+    * @param aliveNeighbours Number of alive neighbours.
+    * @param isAlive States if the cell in question is itself alive or not.
+    * @returns an ACTION object.
+    */
     ACTION getAction(int aliveNeighbours, bool isAlive);
     //for testing
+    
+    /** TEST FUNCTIN
+    * @brief gets population limits
+    * @details Made public for testing
+    * @returns a PopulationLImits object.
+    */
     PopulationLimits getPopLimits(){ return POPULATION_LIMITS; }
+    
+    /**
+    * @brief Returns current directions to be used.
+    * @returns reference to a vector of direction values.
+    */
     const vector<Directions>& getDirections() { return DIRECTIONS; }
     /**
      * @brief Constructor for a rule of existence. Used by derived classes.
