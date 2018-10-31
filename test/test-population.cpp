@@ -7,7 +7,6 @@
  */
 
 #include "catch.hpp"
-#include
 #include "Cell_Culture/Population.h"
 #include <typeinfo>
 
