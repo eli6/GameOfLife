@@ -25,14 +25,18 @@ class MainArgumentsParser {
 public:
     /**
      * @brief Parses the arguments given at the start of execution
-     * @details The main function of the class. Is used before the simulation starts. It takes the
-     * arguments given at the start of execution, creates a vector with pointers to a new instance
-     * of each derived argument class, runs a number of actions that modify the member appValues
-     * based on these arguments, and then returns a reference to it.
+     *
+     * @details Takes the arguments given at execution, then compares them to values needed by the
+     * different BaseArgument-derivatives (f.ex. FileArgument = (-f)/HelpArgument = (-h). If arguments
+     * for a certain Arguments class is found (for example an -f is found), it takes the value given
+     * after the argument and passes it to the corresponding execute() function in the FileArgument
+     * class, that then sets the file name and appValues. At the end, depending on how many rule names
+     * (if any) have been set, it sets default values for the remaining rules. The function returns
+     * the appValues instance with instructions for how to proceed with program execution.
      * @param argv A pointer to a C-string
      * @param length An integer
      * @return A reference to an ApplicationValues object
-     * TODO how test?
+     * @test Control by using different values as arguments
      */
     ApplicationValues& runParser(char* argv[], int length);
 
