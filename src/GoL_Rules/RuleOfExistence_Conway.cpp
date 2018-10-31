@@ -1,6 +1,6 @@
 /*
  * Filename    RuleOfExistence_Conway.cpp
- * Author      Erik StrÃ¶m
+ * Author      Erik Ström
  * Date        October 2017
  * Version     0.1
 */
@@ -20,9 +20,6 @@ void RuleOfExistence_Conway::executeRule() {
 
         // get amount of alive neighbouring cells
         int aliveNeighbours = countAliveNeighbours(it->first);
-        std::cout << it->first.x << "," << it->first.y << " ";
-
-        std::cout << "aliveNeighbors: " << aliveNeighbours << std::endl;
 
         // determine action for cell
         ACTION action = getAction(aliveNeighbours, cell.isAlive());
