@@ -19,8 +19,6 @@ using namespace std;
 Static functions that parses the starting arguments for the application.
 */
 class MainArgumentsParser {
-public:
-    ApplicationValues& runParser(char* argv[], int length);
 
 private:
     ApplicationValues appValues;
@@ -30,6 +28,12 @@ private:
 
     // gets the given option value
     char* getOption(char** begin, char** end, const std::string& option);
+
+public:
+    ApplicationValues& runParser(char* argv[], int length);
+
+    //for testing.
+    ApplicationValues getAppValues( ) { return appValues; };
 };
 
 #endif
