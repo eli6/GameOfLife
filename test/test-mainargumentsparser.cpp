@@ -14,6 +14,8 @@ SCENARIO("testing runParser"){
         MainArgumentsParser mParser;
 
         WHEN("we create our own argv array and pass it to runParser()"){
+
+            //input to be parsed
             char arg0[] = {"GameOfLife"};
             char arg1[] = {"-f"};
             char arg2[] = {"filename.txt"};
@@ -26,6 +28,7 @@ SCENARIO("testing runParser"){
             char arg9[] = {"-or"};
             char arg10[] = {"erik"};
 
+            //create an array of pointers to the above char-arrays (that runParser expects as first argument).
             char *argv[] = {&arg0[0], &arg1[0], &arg2[0], &arg3[0], &arg4[0], &arg5[0], &arg6[0], &arg7[0], &arg8[0], &arg9[0], &arg10[0],
                             nullptr};
 
@@ -57,11 +60,12 @@ SCENARIO("testing runParser"){
         WHEN("we don't specify all rules in argv, runParser() should set correct defaults"){
 
             WHEN("we only specify the odd rule") {
+
                 char arg0[] = {"GameOfLife"};
                 char arg1[] = {"-or"};
                 char arg2[] = {"erik"};
 
-
+                //create an array of pointers to the above char-arrays (that runParser expects as first argument).
                 char *argv[] = {&arg0[0], &arg1[0], &arg2[0], nullptr};
 
                 ApplicationValues appValues = mParser.runParser(argv, 3);
@@ -75,11 +79,12 @@ SCENARIO("testing runParser"){
                 }
             }
             WHEN("we only specify the even rule"){
+
                 char arg0[] = {"GameOfLife"};
                 char arg1[] = {"-er"};
                 char arg2[] = {"erik"};
 
-
+                //create an array of pointers to the above char-arrays (that runParser expects as first argument).
                 char *argv[] = {&arg0[0], &arg1[0], &arg2[0], nullptr};
 
                 ApplicationValues appValues = mParser.runParser(argv, 3);
@@ -93,10 +98,9 @@ SCENARIO("testing runParser"){
                 }
             }
 
-            WHEN("we dont specify any rule names as all"){
+            WHEN("we dont specify any rule names at all"){
+
                 char arg0[] = {"GameOfLife"};
-
-
                 char *argv[] = {&arg0[0], nullptr};
 
                 ApplicationValues appValues = mParser.runParser(argv, 1);
@@ -110,7 +114,7 @@ SCENARIO("testing runParser"){
                 }
             }
 
-            WHEN("we specify some nonsense options as wekk"){
+            WHEN("we specify some nonsense options"){
 
                 char arg0[] = {"GameOfLife"};
                 char arg1[] = {"-xy"};
@@ -120,11 +124,12 @@ SCENARIO("testing runParser"){
                 char arg5[] = {"-jlfkjsdkf"};
                 char arg6[] = {"kul"};
 
+                //create an array of pointers to the above char-arrays (that runParser expects as first argument).
                 char *argv[] = {&arg0[0], &arg1[0], &arg2[0], &arg3[0],&arg4[0], &arg5[0], &arg6[0], nullptr};
 
                 ApplicationValues appValues = mParser.runParser(argv, 7);
 
-                THEN("The file value should still be read"){
+                THEN("The correct option file value should still be read"){
                     REQUIRE(fileName == "minfil.txt");
                 }
 
