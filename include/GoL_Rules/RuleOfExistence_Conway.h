@@ -1,6 +1,6 @@
 /**
  * @file    RuleOfExistence_Conway.h
- * @author      Erik StrÃ¶m
+ * @author      Erik Ström
  * @date        October 2017
  * @version     0.1
  * @brief       Contains RuleOfExistance_Conway class.
@@ -58,12 +58,6 @@ public:
      */
     void executeRule();
 
-
-    /** TEST FUNCTION
-     * @brief Gives the number of alive neighbors aftr each rule execution.
-     * @details Useful for testing if executeRule() counts alive neighbors correctly.
-     *
-     */
     /**
      * @brief Returns cell by specified Point value.
      * @param position A Point data type
@@ -71,7 +65,11 @@ public:
      */
     Cell& getCellAtPosition(Point position) { return cells.at(position); }
 
-    //test func
+     /** TEST FUNCTION
+     * @brief Gives the number of alive neighbors aftr each rule execution.
+     * @details Useful for testing if executeRule() counts alive neighbors correctly.
+     *
+     */
     int countAlive(Point aPoint){
         Cell cell = getCellAtPosition(aPoint);
         if(!cell.isRimCell()){
