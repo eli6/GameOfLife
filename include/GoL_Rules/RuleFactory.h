@@ -9,7 +9,7 @@
 #ifndef RULEFACTORY_H
 #define RULEFACTORY_H
 
-#include "GoL_Rules/RuleOfExistence.h"
+#include "../GoL_Rules/RuleOfExistence.h"
 
 /**
  * @brief Singleton class to handle creation of RulesOfExistence objects.

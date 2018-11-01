@@ -1,6 +1,6 @@
 /**
  * @file    RuleOfExistence_Conway.h
- * @author      Erik StrÃ¶m
+ * @author      Erik Ström
  * @date        October 2017
  * @version     0.1
  * @brief       Contains RuleOfExistance_Conway class.
@@ -57,6 +57,28 @@ public:
      * @test Test that this method sets correct cell colors for different neighbor scenarios.
      */
     void executeRule();
+
+    /**
+     * @brief Returns cell by specified Point value.
+     * @param position A Point data type
+     * @return A reference to a Cell object
+     */
+    Cell& getCellAtPosition(Point position) { return cells.at(position); }
+
+     /** TEST FUNCTION
+     * @brief Gives the number of alive neighbors aftr each rule execution.
+     * @details Useful for testing if executeRule() counts alive neighbors correctly.
+     *
+     */
+    int countAlive(Point aPoint){
+        Cell cell = getCellAtPosition(aPoint);
+        if(!cell.isRimCell()){
+            int aliveN = countAliveNeighbours(aPoint);
+            return aliveN;
+        }
+        return 0;
+
+    }
 };
 
 #endif //GAMEOFLIFE_RULEOFEXISTENCE_CONWAY_H

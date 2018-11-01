@@ -1,6 +1,6 @@
 /**
  * @file RuleOfExistence.h
- * @author Erik StrÃ¶m
+ * @author Erik Ström
  * @date October 2017
  * @version 0.1
  * @brief Rules of Existance for cells.
@@ -15,8 +15,8 @@ of the simulation, and determines the fate of each cell in the world population.
 #include<string>
 #include<map>
 #include<vector>
-#include "Cell_Culture/Cell.h"
-#include "Support/Globals.h"
+#include "../Cell_Culture/Cell.h"
+#include "../Support/Globals.h"
 using namespace std;
 
 
@@ -53,21 +53,45 @@ implements their logic based on the virtual method executeRule().
  */
 class RuleOfExistence {
 protected:
-    string ruleName;
+    // Amounts of alive neighbouring cells, with specified limits
+    const PopulationLimits POPULATION_LIMITS;
+
 
     // Reference to the population of cells
     map<Point, Cell>& cells;
 
-    // Amounts of alive neighbouring cells, with specified limits
-    const PopulationLimits POPULATION_LIMITS;
-
     // The directions, by which neighbouring cells are identified
     const vector<Directions>& DIRECTIONS;
 
+    string ruleName;
+
+
     int countAliveNeighbours(Point currentPoint);
-    ACTION getAction(int aliveNeighbours, bool isAlive);
 
 public:
+    //made public for testing
+    /** TEST FUNCTION
+    * @brief Gets the action depending on number of alive neighbours and state of cell itself.
+    * @details Made public for test purposes
+    * @param aliveNeighbours Number of alive neighbours.
+    * @param isAlive States if the cell in question is itself alive or not.
+    * @returns an ACTION object.
+    */
+    ACTION getAction(int aliveNeighbours, bool isAlive);
+    //for testing
+    
+    /** TEST FUNCTIN
+    * @brief gets population limits
+    * @details Made public for testing
+    * @returns a PopulationLImits object.
+    */
+    PopulationLimits getPopLimits(){ return POPULATION_LIMITS; }
+    
+    /**
+    * @brief Returns current directions to be used.
+    * @returns reference to a vector of direction values.
+    */
+    const vector<Directions>& getDirections() { return DIRECTIONS; }
     /**
      * @brief Constructor for a rule of existence. Used by derived classes.
      * @details The parameters sets values for population limit values (values for under- /overpopulation etc.),

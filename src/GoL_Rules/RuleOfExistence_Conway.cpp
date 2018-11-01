@@ -1,6 +1,6 @@
 /*
  * Filename    RuleOfExistence_Conway.cpp
- * Author      Erik StrÃ¶m
+ * Author      Erik Ström
  * Date        October 2017
  * Version     0.1
 */
