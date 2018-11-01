@@ -7,7 +7,7 @@
  * @brief Contains all the tests for the Cell class constructor
 */
 
-#include <catch.hpp>
+#include "catch2.hpp"
 #include <iostream>
 #include "../include/Cell_Culture/Cell.h"
 
