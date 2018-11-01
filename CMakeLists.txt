@@ -24,7 +24,7 @@ set(SRC_LIST
 
 
 set(TEST_LIST
-         test/test-main.cpp test/test-cell.cpp test/test-mainargumentsparser.cpp test/test-mainargumentsparser.cpp test/test-ruleOfExistence_conway.cpp test/test_fileloader.cpp)
+         test/test-main.cpp test/test-cell.cpp test/test-mainargumentsparser.cpp test/test-mainargumentsparser.cpp test/test-ruleOfExistence_conway.cpp test/test_fileloader.cpp test/testa-rulefactory.cpp)
 
 add_executable(${PROJECT_NAME} ${SRC_LIST} ${TEST_LIST})
 
