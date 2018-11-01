@@ -63,6 +63,28 @@ public:
      * @test Test that this method sets correct cell colors for different neighbor scenarios and that it adds an "E" to very old cells.
      */
     void executeRule();
+
+    /**
+     * @brief Returns cell by specified Point value.
+     * @param position A Point data type
+     * @return A reference to a Cell object
+     */
+    Cell& getCellAtPosition(Point position) { return cells.at(position); }
+
+    /** TEST FUNCTION
+    * @brief Gives the number of alive neighbors aftr each rule execution.
+    * @details Useful for testing if executeRule() counts alive neighbors correctly.
+    *
+    */
+    int countAlive(Point aPoint){
+        Cell cell = getCellAtPosition(aPoint);
+        if(!cell.isRimCell()){
+            int aliveN = countAliveNeighbours(aPoint);
+            return aliveN;
+        }
+        return 0;
+
+    }
 };
 
 #endif //GAMEOFLIFE_RULEOFEXISTENCE_ERIK_H
