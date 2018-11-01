@@ -23,7 +23,9 @@ set(SRC_LIST
         include/Cell_Culture/Cell.h include/Support/FileLoader.h include/GameOfLife.h include/Support/Globals.h include/Support/MainArgumentsParser.h include/Cell_Culture/Population.h include/GoL_Rules/RuleFactory.h include/GoL_Rules/RuleOfExistence.h include/ScreenPrinter.h src/Cell_Culture/Cell.cpp src/Support/FileLoader.cpp src/GameOfLife.cpp src/Support/Globals.cpp src/Cell_Culture/Population.cpp src/GoL_Rules/RuleFactory.cpp src/GoL_Rules/RuleOfExistence.cpp src/ScreenPrinter.cpp include/GoL_Rules/RuleOfExistence_Conway.h src/GoL_Rules/RuleOfExistence_Conway.cpp include/GoL_Rules/RuleOfExistence_VonNeumann.h src/GoL_Rules/RulesOfExistence_VonNeumann.cpp include/GoL_Rules/RuleOfExistence_Erik.h src/GoL_Rules/RuleOfExistence_Erik.cpp include/Support/SupportStructures.h src/Support/MainArgumentsParser.cpp include/Support/MainArguments.h src/Support/MainArguments.cpp)
 
 set(TEST_LIST
-        test/test-main.cpp test/test-cell.cpp test/test-mainargumentsparser.cpp test/test-mainargumentsparser.cpp test/test-ruleOfExistence_conway.cpp test/test_fileloader.cpp)
+        test/test-main.cpp
+        #test/test-cell.cpp test/test-mainargumentsparser.cpp test/test-mainargumentsparser.cpp test/test-ruleOfExistence_conway.cpp test/test_fileloader.cpp
+        test/test-gameoflife.cpp)
 
 add_executable(${PROJECT_NAME} ${SRC_LIST} ${TEST_LIST})
 
