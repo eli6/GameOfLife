@@ -43,7 +43,8 @@ SCENARIO("Testing constructor"){
             }
 
             THEN("it should have directions set to all directions"){
-                //TODO check this
+
+                REQUIRE(conway->getDirections().size() == 8);
 
 
             }
