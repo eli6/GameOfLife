@@ -24,7 +24,8 @@ set(SRC_LIST
 
 
 set(TEST_LIST
-         test/test-main.cpp test/test-cell.cpp test/test-mainargumentsparser.cpp test/test-mainargumentsparser.cpp)
+         test/test-main.cpp #test/test-cell.cpp test/test-mainargumentsparser.cpp test/test-mainargumentsparser.cpp
+        test/test-mainarguments.cpp)
 
 add_executable(${PROJECT_NAME} ${SRC_LIST} ${TEST_LIST})
 
