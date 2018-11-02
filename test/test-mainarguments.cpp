@@ -49,17 +49,15 @@ SCENARIO("Testing the class BaseArgument and its derived classes") {
 
             // test with expected argument
             THEN("Calling execute() with an expected argument type should set generations to that value") {
-                char str[] = {"50"};
-                ch = str;   // creating an expected char* value type
-                garg.execute(av, ch);
+                char arg[] = {"50"};  // creating an expected char* value type
+                garg.execute(av, arg);
                 REQUIRE(av.maxGenerations == 50);
             }
 
             // test with unexpected argument
             THEN("Calling execute() with an unexpected argument type should throw an exception") {
-                char str[] = {"dummy"};
-                ch = str;   // creating an unexpected char* value type
-                REQUIRE_THROWS(garg.execute(av, ch));
+                char arg[] = {"dummy"}; // creating an unexpected char* value type
+                REQUIRE_THROWS(garg.execute(av, arg));
             }
         }
     }
@@ -83,19 +81,16 @@ SCENARIO("Testing the class BaseArgument and its derived classes") {
             // test expected argument
             THEN("Calling execute() with an expected argument should set the world dimensions") {
                 char dimensions[] = {"50 100"}; // creating an expected argument
-                ch = dimensions;
-                warg.execute(av, ch);
+                warg.execute(av, dimensions);
                 REQUIRE(WORLD_DIMENSIONS.WIDTH == 50);
                 REQUIRE(WORLD_DIMENSIONS.HEIGHT == 100);
             }
 
             // test with unexpected argument
             THEN("Calling execute() with an unexpected argument should throw an exception") {
-                char dummy[] = {"dummy"}; // creating an unexpected argument
-                ch = dummy;
-                REQUIRE_THROWS(warg.execute(av, ch));   // fails!
+                char arg[] = {"dummy"}; // creating an unexpected argument
+                REQUIRE_THROWS(warg.execute(av, arg));   // fails!
             }
-
         }
     }
 
@@ -117,9 +112,8 @@ SCENARIO("Testing the class BaseArgument and its derived classes") {
 
             // test with string
             THEN("Calling execute() a string should set fileName to that value") {
-                char str[] = {"newFileName"};
-                ch = str;   // creating an expected char* value type
-                farg.execute(av, ch);
+                char arg[] = {"newFileName"}; // creating an expected char* value type
+                farg.execute(av, arg);
                 REQUIRE(fileName == "newFileName");
             }
         }
@@ -143,9 +137,8 @@ SCENARIO("Testing the class BaseArgument and its derived classes") {
 
             // test with string
             THEN("Calling execute() with a string argument should set evenRuleArgument to that value") {
-                char str[] = {"evenRule"};
-                ch = str;   // creating an expected char* value type
-                earg.execute(av, ch);
+                char arg[] = {"evenRule"}; // creating an expected char* value type
+                earg.execute(av, arg);
                 REQUIRE(av.evenRuleName == "evenRule");
             }
         }
@@ -168,10 +161,9 @@ SCENARIO("Testing the class BaseArgument and its derived classes") {
             }
 
             // test with string
-            THEN("Calling execute() with a string argument should set evenRuleArgument to that value") {
-                char str[] = {"oddRule"};
-                ch = str;   // creating an expected char* value type
-                oarg.execute(av, ch);
+            THEN("Calling execute() with a string argument should set oddRuleArgument to that value") {
+                char arg[] = {"oddRule"}; // creating an expected char* value type
+                oarg.execute(av, arg);
                 REQUIRE(av.oddRuleName == "oddRule");
             }
         }
