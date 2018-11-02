@@ -52,6 +52,8 @@ SCENARIO("Testing constructor"){
             THEN("its rule name should be 'conway'"){
                 REQUIRE (conway->getRuleName() == "conway");
             }
+
+            delete conway;
         }
     }
 }
@@ -186,6 +188,8 @@ SCENARIO("Testing executeRule()") {
 
                         }
 
+                        delete conway;
+
                     }
                 }
             }
@@ -239,6 +243,7 @@ SCENARIO("testing rim cell detection"){
 
                             }
                         }
+                    delete conway;
                     }
 
             }

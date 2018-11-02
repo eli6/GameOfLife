@@ -53,6 +53,8 @@ SCENARIO("Testing von Neumann constructor"){
             THEN("its rule name should be 'von_neumann'"){
                 REQUIRE (vonNeumann->getRuleName() == "von_neumann");
             }
+
+            delete vonNeumann;
         }
     }
 }
@@ -186,6 +188,8 @@ SCENARIO("Testing executeRule() for vonNeumann") {
 
                         }
 
+                        delete vonNeumann;
+
                     }
                 }
             }
@@ -239,6 +243,7 @@ SCENARIO("testing rim cell detection in vonNeumann"){
 
                         }
                     }
+                    delete vonNeumann;
                 }
 
             }
