@@ -249,6 +249,66 @@ SCENARIO("testing rim cell detection for Erik"){
 
 
 
+SCENARIO("TESTING for prime elders and different age colors depending on cell age") {
+    GIVEN("a cell in a map") {
+
+        map<Point, Cell> cells;
+
+        //we generate a small 5x5 cell population where everyone is alive exept rim cells
+        for (int row = 0; row <= 4; row++) {
+            for (int column = 0; column <= 4; column++) {
+
+
+                if (column == 0 || row == 0 || column == 4 ||
+                    row == 4) {  // if cell should be a rim cell, create a rim cell
+                    cells[Point{column, row}] = Cell(true); // create a cell with rimCell state set to true
+                } else { // If cell is an ordinary cell
+                    cells[Point{column, row}] = Cell(false,
+                                                     GIVE_CELL_LIFE); // create a ordinary living cell
+
+                }
+            }
+        }
+                WHEN("we initiate an erik rule object with this map") {
+                    auto erik = new RuleOfExistence_Erik(cells);
+
+            //TODO here i try to make cells age
+                    AND_WHEN("we make the cell in the middle age 6 generationS") {
+                        for (int i = 0; i < 6; i++) {
+                            for(auto it = cells.begin(); it != cells.end(); it++){
+
+                                if(!it->second.isRimCell()){
+                                    it->second.setNextGenerationAction(GIVE_CELL_LIFE);
+                                    it->second.updateState();
+                                    it->second.setNextGenerationAction(GIVE_CELL_LIFE);
+
+                                }
+
+                            }
+
+
+                        }
+                        Cell cell = erik->getCellAtPosition({2, 2});
+
+                        //TODO this cell should have aged but it hasn't!!!
+                        std::cout << cell.getAge() << std::endl;
+                        std::cout << int(cell.getColor()) << std::endl;
+                        THEN("it should have a cyan color") {
+                            REQUIRE(cell.getColor() == COLOR::CYAN);
+                        }
+                    }
+
+                }AND_WHEN("we make it age 11 generations, it should get the value 'E'") {
+
+                }AND_WHEN("we make it a prime elder") {
+
+                }
+
+            }
+        }
+
+
+
 
 
 

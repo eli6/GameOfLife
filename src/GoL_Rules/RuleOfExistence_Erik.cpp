@@ -49,7 +49,7 @@ void RuleOfExistence_Erik::executeRule() {
 * cellular automata.
 */
 void RuleOfExistence_Erik::erikfyCell(Cell& cell, ACTION action) {
-    if (action != KILL_CELL) {
+    if (action != KILL_CELL) { //TODO check do nothing?
 
         int cellAge = cell.getAge();
 
