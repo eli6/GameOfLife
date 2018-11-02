@@ -75,7 +75,6 @@ SCENARIO("Testing executeRule() for Erik") {
         WHEN("we create a test cell population of 5x5 cells and create 1-8 neighbours for the middle cell in a for loop") {
             for (int j = 0; j < 9; j++) {
                 map<Point, Cell> cells;
-                //int living = 0;
 
                 //count how many living cells we produce since we want to test 1-8 living cells in our matrix
                 int counter = 0;
@@ -252,7 +251,7 @@ SCENARIO("testing rim cell detection for Erik"){
 
 
 SCENARIO("TESTING for prime elders and different age colors depending on cell age") {
-    GIVEN("a cell in a map") {
+    GIVEN("a point,cell map") {
 
         map<Point, Cell> cells;
 
