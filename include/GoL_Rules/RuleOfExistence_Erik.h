@@ -26,10 +26,23 @@ private:
     char usedCellValue;	// char value to differentiate very old cells.
     Cell* primeElder;
 
-    void erikfyCell(Cell& cell, ACTION action);
     void setPrimeElder(Cell* newElder);
 
 public:
+    /**
+     * Getter public for testing
+     */
+    Cell* getPrimeElder(){ return primeElder; }
+
+    /** MADE PUBLIC FOR TESTING
+     * @brief Changes cells based on their generational status
+     * @param cell The cell to be examined
+     * @param action Action to take depending on number of neighbours.
+
+     * @bug Cells older than 10 generations stop being cyan colored, which seems to be unintened
+     */
+    void erikfyCell(Cell& cell, ACTION action);
+
     /**
      * @brief Constructor for the class
      * @details Constructs a rule of existance object with population limits:

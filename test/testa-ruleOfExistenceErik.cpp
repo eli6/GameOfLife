@@ -15,6 +15,7 @@
 /***********************************
 * TESTING CONSTRUCTOR WITH DIFFERENT PARAMETERS
 ***********************************/
+
 SCENARIO("Testing constructor for Erik"){
     GIVEN("a small cell population"){
         Point point1 = {1,1};
@@ -62,6 +63,7 @@ SCENARIO("Testing constructor for Erik"){
 /***********************************
 * TESTING EXECUTE RULE AND DEPENDENT FUNCTIONS
 ***********************************/
+
 SCENARIO("Testing executeRule() for Erik") {
     GIVEN("a Conway Rule of Existence") {
 
@@ -269,43 +271,126 @@ SCENARIO("TESTING for prime elders and different age colors depending on cell ag
                 }
             }
         }
-                WHEN("we initiate an erik rule object with this map") {
-                    auto erik = new RuleOfExistence_Erik(cells);
 
-            //TODO here i try to make cells age
-                    AND_WHEN("we make the cell in the middle age 6 generationS") {
-                        for (int i = 0; i < 6; i++) {
-                            for(auto it = cells.begin(); it != cells.end(); it++){
+        WHEN("we initiate an erik rule object with this map") {
+            auto erik = new RuleOfExistence_Erik(cells);
 
-                                if(!it->second.isRimCell()){
-                                    it->second.setNextGenerationAction(GIVE_CELL_LIFE);
-                                    it->second.updateState();
-                                    it->second.setNextGenerationAction(GIVE_CELL_LIFE);
-
-                                }
-
-                            }
-
+            AND_WHEN("we make all cells age 5 generationS") {
+                for (int i = 0; i < 4; i++) {
+                    for (auto it = cells.begin(); it != cells.end(); it++) {
+                        if (!it->second.isRimCell()) {
+                            it->second.setNextGenerationAction(IGNORE_CELL);
+                            it->second.updateState();
 
                         }
-                        Cell cell = erik->getCellAtPosition({2, 2});
 
-                        //TODO this cell should have aged but it hasn't!!!
-                        std::cout << cell.getAge() << std::endl;
-                        std::cout << int(cell.getColor()) << std::endl;
-                        THEN("it should have a cyan color") {
-                            REQUIRE(cell.getColor() == COLOR::CYAN);
-                        }
                     }
 
-                }AND_WHEN("we make it age 11 generations, it should get the value 'E'") {
 
-                }AND_WHEN("we make it a prime elder") {
+                }
 
+                AND_WHEN("we get the middle cell and erikfy it") {
+
+                    Cell cell = erik->getCellAtPosition({2, 2});
+
+                    //erikfyCell will set nextColor to cyan now that the cell is 5 gen old
+                    erik->erikfyCell(cell, IGNORE_CELL);
+
+                    //we update state to reach the next state. cell is now 6 gen old
+                    cell.updateState();
+
+                    //now the current color should be cyan
+                    THEN("it should have a cyan color") {
+                        REQUIRE(cell.getColor() == COLOR::CYAN);
+                    }
+                }
+
+            }
+
+            AND_WHEN("we make the cells age 11 generations") {
+                for (int i = 0; i < 9; i++) {
+                    for (auto it = cells.begin(); it != cells.end(); it++) {
+                        if (!it->second.isRimCell()) {
+                            it->second.setNextGenerationAction(IGNORE_CELL);
+                            it->second.updateState();
+
+                        }
+
+                    }
+
+
+                }
+                AND_WHEN("we get the middle cell and erikfy it") {
+
+                    Cell cell = erik->getCellAtPosition({2, 2});
+
+                    //erikfyCell will set nextColor to cyan now that the cell is 5 gen old
+                    erik->erikfyCell(cell, IGNORE_CELL);
+
+                    //we update state to reach the next state. cell is now 6 gen old
+                    cell.updateState();
+
+                    THEN("It should have the value E") {
+                        REQUIRE(cell.getCellValue() == 'E');
+                    }
+
+                    THEN("it should still have a cyan color") {
+                        REQUIRE(cell.getColor() == COLOR::CYAN);
+                    }
+
+                    THEN("it will be a prime elder since that position is vacant") {
+                        REQUIRE(cell.getColor() == STATE_COLORS.ELDER);
+                    }
+
+                    AND_WHEN("we make another cell age even more, then erikfy it and update both cells") {
+
+                        //let cell at 2,3 age one more year
+                        Cell cell2 = erik->getCellAtPosition({2, 3});
+                        cell2.setNextGenerationAction(IGNORE_CELL);
+                        cell2.updateState();
+
+                        erik->erikfyCell(cell2, IGNORE_CELL);
+
+                        //update new prime elder-to-be
+                        cell2.updateState();
+
+                        //update old prime elder
+                        cell.updateState();
+
+                        THEN("it will be a prime elder since it is older than the former prime elder") {
+                            REQUIRE(cell2.getColor() == STATE_COLORS.ELDER);
+                        }
+
+                        THEN("our old prime elder will be old again") {
+                            REQUIRE(cell.getColor() == STATE_COLORS.OLD);
+                        }
+
+                        AND_WHEN("we kill our first cell") {
+                            erik->erikfyCell(cell, KILL_CELL);
+                            cell.updateState();
+
+                            THEN("it should have the value '#' again") {
+                                REQUIRE(cell.getCellValue() == '#');
+                            }
+                        }
+
+                        AND_WHEN("we kill our prime elder") {
+                            erik->erikfyCell(cell2, KILL_CELL);
+                            cell2.updateState();
+                            THEN("prime elder should be a nullptr again") {
+                                REQUIRE(erik->getPrimeElder() == nullptr);
+                            }
+                        }
+
+
+                    }
                 }
 
             }
         }
+    }
+}
+
 
 
 
