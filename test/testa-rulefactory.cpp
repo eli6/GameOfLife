@@ -1,3 +1,10 @@
+/**
+ * @file testa-rulefactory.cpp
+ * @author Elin Fritiofsson
+ * @version 0.1
+ * @date 2 november 2018
+ */
+
 #include "catch2.hpp"
 #include <map>
 #include "../include/GoL_Rules/RuleFactory.h"
@@ -20,7 +27,7 @@ SCENARIO("we create and return a rule of existence"){
         }
         WHEN("We pass a non existant rule into the function"){
             ruleName = "elin";
-            THEN("The function should throw"){
+            THEN("The function should throw an exception"){
                 REQUIRE_THROWS(ruleFactory.createAndReturnRule(cells, ruleName));
             }
 
