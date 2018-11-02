@@ -36,6 +36,7 @@ SCENARIO("A population of cells") {
                 REQUIRE(population.getEvenRule()->getRuleName() == "conway");
                 REQUIRE(population.getOddRule()->getRuleName() == "conway");
             }
+            fileName = ""; // reset fileName
         }
 
         WHEN("We initiate the population randomly with the rule 'conway'") {
