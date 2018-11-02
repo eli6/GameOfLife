@@ -39,6 +39,7 @@ public:
      * @param ruleName A string with the default value 'conway'
      * @return A pointer to a RuleOfExistence object
      * @test That a correct type is created with the different names
+     * @bug Function does not throw when the ruleName does not exist, and silently defaults to conway.
      */
     RuleOfExistence* createAndReturnRule(map<Point, Cell>& cells, string ruleName = "conway");
 };
