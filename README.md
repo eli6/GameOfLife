@@ -1,11 +1,12 @@
 # Tests and Documentation for Game Of Life.
 
+Fork of GameOfLife project adding tests and documentation for the project. This main page is the same as the Bitbucket README to avoid duplicating the information there.
+
 Doxygen files for generation of documentation are in folder "docs". Test files are in the folder "test". The other folders contain the code for GameOfLife.
 
 ## Requirements
 
-To run the tests you need to have an environmental variable called ``$TOOLS_INCLUDE`` configured, that contains the file "catch.hpp".
-
+No specific requirements
 
 ## Getting Started
 
@@ -25,11 +26,12 @@ doxygen Doxyfile && cd html && open index.html
 Now you can read everything about GameOfLife!
 
 ###Run tests
-The file "src/main.cpp" is commented out in CMakeLists.txt, so the Catch tests will run automatically.
+
+Run the executable GameOfLife-test in cmake-build-debug folder (or compile with GameOfLife-test-configuration) to run the tests.
 
 ## FAQ
 
-Ask questions about this amazing Doxygen documentation!
+Ask questions about this amazing Doxygen documentation and we will answer you!
 
 ## Authors
 
