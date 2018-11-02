@@ -49,8 +49,14 @@ public:
      * 2. Print the first population onto the screen
      * 3. Continue to calculate new generations and printing them until all generations have been computed.
      * @test It should run the correct number of generations
+     * @bug Doesn't throw exception when GameOfLife object is created with incorrect values
      */
     void runSimulation();
+
+    /*
+     * Test functions, written for testing purposes
+     */
+    Population& getPopulation() { return population; }
 
 };
 
