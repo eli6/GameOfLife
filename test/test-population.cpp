@@ -13,13 +13,39 @@
 SCENARIO("A population of cells") {
     GIVEN("We create a population") {
         Population population;
+
+        /*
+         * Testing constructor
+         */
+        THEN("There shouln't be a population of cells yet and the rules should not be set") {
+            REQUIRE(population.getTotalCellPopulation() == 0);
+            REQUIRE(population.getEvenRule() == nullptr);
+            REQUIRE(population.getOddRule() == nullptr);
+        }
+
         /*
          * Testing initiatePopulation()
          */
-        WHEN("We initiate the population with the rule 'conway'") {
+        WHEN("We initiate the population from file with the rule 'conway'") {
+            fileName = "../Population_Seed.txt";
             population.initiatePopulation("conway");
             THEN("There should be a cell population") {
                 REQUIRE(population.getTotalCellPopulation() > 0);
+            }
+            THEN("Both rules should be set to 'conway'") {
+                REQUIRE(population.getEvenRule()->getRuleName() == "conway");
+                REQUIRE(population.getOddRule()->getRuleName() == "conway");
+            }
+        }
+
+        WHEN("We initiate the population randomly with the rule 'conway'") {
+            population.initiatePopulation("conway");
+            THEN("There should be a cell population") {
+                REQUIRE(population.getTotalCellPopulation() > 0);
+            }
+            THEN("Both rules should be set to 'conway'") {
+                REQUIRE(population.getEvenRule()->getRuleName() == "conway");
+                REQUIRE(population.getOddRule()->getRuleName() == "conway");
             }
 
             /*
@@ -38,15 +64,15 @@ SCENARIO("A population of cells") {
                     Cell* testCell = nullptr; // create a pointer to a Cell object
                     int height = WORLD_DIMENSIONS.HEIGHT;
                     int width = WORLD_DIMENSIONS.WIDTH;
-                    while(row <= height && column <= width) { // stays within world borders
+                    while(row < height && column < width) { // stays within world borders
                         testCell = &population.getCellAtPosition(Point{column, row}); // get reference to a cell
                         // check so that cell is not rim cell, it's not alive, and the next generation action is set to give cell life
                         if(!testCell->isRimCell() && testCell->getColor() == STATE_COLORS.DEAD && testCell->getNextGenerationAction() == GIVE_CELL_LIFE) {
                             break; // break if criteria is met
-                        } else if(column != width)
+                        } else if(column != width-1) // increment column until end of width
                             column++;
                         else {
-                            column = 0;
+                            column = 0; // if last column is reached, set it to 0 and begin from next row
                             row++;
                         }
                     }
@@ -54,8 +80,6 @@ SCENARIO("A population of cells") {
                     AND_WHEN("We call the function") {
                         population.calculateNewGeneration();
                         THEN("The cell should be alive") {
-                            if(testCell == nullptr)
-                                cout << "testCell = nullptr" << endl;
                             REQUIRE(testCell->getColor() == STATE_COLORS.LIVING);
                         }
                     }
@@ -76,8 +100,6 @@ SCENARIO("A population of cells") {
 
             /*
              * getTotalCellPopulation()
-             *
-             * bug!
              */
             THEN("The cellpopulation should be the same as the world dimensions") {
                 REQUIRE(population.getTotalCellPopulation() == WORLD_DIMENSIONS.HEIGHT * WORLD_DIMENSIONS.WIDTH);

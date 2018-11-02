@@ -66,8 +66,17 @@ public:
      * @test If 'fileName' is empty, it should build cell culture randomly, otherwise from
      * file. If oddRuleName is empty, it should equal evenRuleName. The cell culture chould
      * be initiated correctly, check the 'cells' member after initialization.
+     * @bug The cell population after initialization is not the same as the world dimensions.
      */
     void initiatePopulation(string evenRuleName, string oddRuleName = "");
+
+    /**
+     * @brief Calculates the new generation of cells
+     * @details Iterates through the cells and updates the state of each one of them and also
+     * executes the rules.
+     * @return An int which is the incremented number of generations.
+     * @test 1) Cells are updated 2) Rules are executed 3) Returns a correct a int value
+     */
     int calculateNewGeneration();
 
     /**
@@ -83,6 +92,11 @@ public:
      */
     int getTotalCellPopulation() { return cells.size(); }
 
+    /*
+     * Test functions to test that the rules are correctly set
+     */
+    RuleOfExistence* getEvenRule() { return evenRuleOfExistence; }
+    RuleOfExistence* getOddRule() { return oddRuleOfExistence; }
 };
 
 #endif
