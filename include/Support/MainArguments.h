@@ -109,6 +109,7 @@ public:
  * @brief Derived class from BaseArgument
  * @details sets the member argValue to '-g'.
  * @test The constructor and member function should function properly
+ * @bug Does not handle exception that is thrown if non-numerical value is given for generations
  */
 class GenerationsArgument : public BaseArgument {
 public:
@@ -129,7 +130,7 @@ public:
      * @param generations A pointer to a char
      * @test The maxGenerations member should be set correctly. If a nullptr is passed then
      * printNoValues() should be called and the simulation should not be run.
-     * @bug stoi() can throw an exception and should be put in a try/catch-clause.
+     * @bug Does not handle exception from stoi() that is thrown if non-numerical value is given for generations
      */
     void execute(ApplicationValues& appValues, char* generations);
 };
@@ -156,6 +157,8 @@ public:
      * @test The WORLD_DIMENSIONS should be read from the global value dimensions and
      * if a nullpointer is passed instead then printNoValues() should be called and the
      * simulation should not be run.
+     * @bug Does not throw an exception when given letters instead of numbers for world
+     * dimensions, but silently defaults to 0
      */
     void execute(ApplicationValues& appValues, char* dimensions);
 };
@@ -178,7 +181,7 @@ public:
     /**
      * @brief Sets the fileName through the second parameter
      * @param appValues Reference to an ApplicationValues object
-     * @param fileNameArg A pointer to char
+     * @param fileNameArg a pointer to the beginning of the file name array
      * @test fileName should be set by the char pointer and if a nullpointer is passed instead
      * then printNoValues() should be called and the simulation should not be run.
      */
