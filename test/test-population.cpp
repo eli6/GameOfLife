@@ -6,7 +6,7 @@
  * @brief Contains tests for Population.h
  */
 
-#include "catch.hpp"
+#include "catch2.hpp"
 #include "Cell_Culture/Population.h"
 #include <typeinfo>
 

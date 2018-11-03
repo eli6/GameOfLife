@@ -26,10 +26,23 @@ private:
     char usedCellValue;	// char value to differentiate very old cells.
     Cell* primeElder;
 
-    void erikfyCell(Cell& cell, ACTION action);
     void setPrimeElder(Cell* newElder);
 
 public:
+    /**
+     * Getter public for testing
+     */
+    Cell* getPrimeElder(){ return primeElder; }
+
+    /** MADE PUBLIC FOR TESTING
+     * @brief Changes cells based on their generational status
+     * @param cell The cell to be examined
+     * @param action Action to take depending on number of neighbours.
+
+     * @bug Cells older than 10 generations stop being cyan colored, which seems to be unintened
+     */
+    void erikfyCell(Cell& cell, ACTION action);
+
     /**
      * @brief Constructor for the class
      * @details Constructs a rule of existance object with population limits:
@@ -63,6 +76,28 @@ public:
      * @test Test that this method sets correct cell colors for different neighbor scenarios and that it adds an "E" to very old cells.
      */
     void executeRule();
+
+    /**
+     * @brief Returns cell by specified Point value.
+     * @param position A Point data type
+     * @return A reference to a Cell object
+     */
+    Cell& getCellAtPosition(Point position) { return cells.at(position); }
+
+    /** TEST FUNCTION
+    * @brief Gives the number of alive neighbors aftr each rule execution.
+    * @details Useful for testing if executeRule() counts alive neighbors correctly.
+    *
+    */
+    int countAlive(Point aPoint){
+        Cell cell = getCellAtPosition(aPoint);
+        if(!cell.isRimCell()){
+            int aliveN = countAliveNeighbours(aPoint);
+            return aliveN;
+        }
+        return 0;
+
+    }
 };
 
 #endif //GAMEOFLIFE_RULEOFEXISTENCE_ERIK_H
