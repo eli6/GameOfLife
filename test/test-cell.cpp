@@ -89,8 +89,14 @@ SCENARIO("We create a Cell object using different constructor parameters") {
         THEN("The member color should be STATE_COLORS.DEAD") {
             REQUIRE(cell.getColor() == STATE_COLORS.DEAD);
         }
+        THEN("it should of course not be alive"){
+            REQUIRE(!cell.isAlive());
+        }
         THEN("The age should be 0") {
             REQUIRE(cell.getAge() == 0);
+        }
+        THEN("it should never be alive, so isAliveNext should not be true"){
+            REQUIRE_FALSE(cell.isAliveNext());
         }
     }
 }
@@ -126,7 +132,7 @@ SCENARIO("We test that correct values are set for the next generation") {
     GIVEN("a default cell") {
         Cell cell;
 
-        //TESTING setIsAliveNext() and isAliveNext()
+        //TESTING setIsAliveNext() and isAliveNext() together
         WHEN("it is set to be dead next generation") {
             cell.setIsAliveNext(false);
             THEN("it should be dead next") {
@@ -171,7 +177,7 @@ SCENARIO("We test that correct values are set for the next generation") {
     }
 }
 
-SCENARIO("we test setting and getting of nextGenerationAction"){
+SCENARIO("we test setting and getting of nextGenerationAction and how the function interacts with isAliveNext"){
     GIVEN("a cell"){
         Cell cell;
         WHEN("we set next GenerationAction to GIVE_CELL_LIFE"){
@@ -179,8 +185,21 @@ SCENARIO("we test setting and getting of nextGenerationAction"){
             THEN("nextGenerationAction should have that value"){
                 REQUIRE(cell.getNextGenerationAction() == GIVE_CELL_LIFE);
             }
+            THEN("cell should have isAliveNext set to true"){
+                REQUIRE(cell.isAliveNext());
+            }
         }
-    }
+        WHEN("we set nextGenerationActin to KILL_CELL"){
+            cell.setNextGenerationAction(KILL_CELL);
+                THEN("nextGenerationAction should have that value"){
+                    REQUIRE(cell.getNextGenerationAction() == KILL_CELL);
+                }
+                THEN("cell should have isAliveNext set to false"){
+                    REQUIRE_FALSE(cell.isAliveNext());
+                }
+            }
+        }
+
 }
 
 /***********************************

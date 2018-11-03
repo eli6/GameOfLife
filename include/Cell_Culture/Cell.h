@@ -120,6 +120,8 @@ public:
      * @param action an ACTION value set to 'DO_NOTHING'
      *
      * @test Test so that the object is created with the correct values
+     * @bug nextUpdate.isAliveNext should be set depending on the action value.
+     * @bug Should not be callable with a second value if rimCell = false since that value is useless to program. Create overloaded constructor for rim cells with only one parameter.
      */
     Cell(bool isRimCell = false, ACTION action = DO_NOTHING);
 
@@ -133,15 +135,14 @@ public:
     bool isAlive();
 
     /**
-     * @brief Sets the state of the next generation
-     * @details The state is based on the current state of the cell and the state of
-     * its neighbours. If the cell is a rim cell, or its 'action' memeber is set to
-     * GIVE_CELL_LIFE while isAlive() returns 'true', then nothing happens. Otherwise,
-     * 'action' equals nextGenerationAction() run on nextUpdate.
+     * @brief Sets the state of the next generation action
+     * @details Sets action to be taken for cell during next update. Should also change value of details.isAliveNext since
+     * it is the most suitable place to set that variable.
      * @param action an ACTION value
      *
      * @test Test so that the two if-statements work, as well as setting the 'action' member
      * correctly
+     * @bug Doesn't set willBeAliveNext based on the action, which must happen here.
      */
     void setNextGenerationAction(ACTION action);
 
