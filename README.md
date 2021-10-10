@@ -1,4 +1,4 @@
-# University Project
+# GameOfLife University Project
 
 [Game of Life!](https://sv.wikipedia.org/wiki/Game_of_Life) is a zero-player game, simulating cells on screen as live or dead according to an initial configuration. This code has been copied to Github from my Bitbucket repository [GameOfLife!](https://bitbucket.org/eli6/gameoflife/src/master/) and if you are interested, it's better to download the project directly from the Bitbucket link since some links to external projects are broken here on GitHub.
 
