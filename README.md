@@ -1,8 +1,10 @@
 # Game Of Life University Project
 
-[Game of Life!](https://sv.wikipedia.org/wiki/Game_of_Life) is a zero-player game, simulating cells on screen as live or dead according to an initial configuration. This code has been copied to Github from my Bitbucket repository [GameOfLife!](https://bitbucket.org/eli6/gameoflife/src/master/) and if you are interested, it's better to download the project directly from the Bitbucket link since some links to external projects are broken here on GitHub.
+[Game of Life!](https://sv.wikipedia.org/wiki/Game_of_Life) is a zero-player game, simulating cells on screen as live or dead according to an initial configuration. 
 
-My contribution was writing the test suite for the application together with another student. The tests can be found in the "tests" folder and run according to the description below.
+My contribution was writing the test suite for the application together with another student. The tests can be found in the "tests" folder and run according to the description below the image.
+
+This code has been copied to Github from my Bitbucket repository [GameOfLife!](https://bitbucket.org/eli6/gameoflife/src/master/) and if you are interested, it's better to download the project directly from the Bitbucket link since some links to external projects are broken here on GitHub.
 
 <img width="811" alt="Skärmavbild 2021-10-10 kl  16 03 33" src="https://user-images.githubusercontent.com/11839563/136699026-0fdabe5d-b634-43eb-a69b-a1f8246567b0.png">
 
