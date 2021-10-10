@@ -1,3 +1,9 @@
+# University Project
+
+[Game of Life!](https://sv.wikipedia.org/wiki/Game_of_Life) is a zero-player game, simulating cells on screen as live or dead according to an initial configuration.
+
+<img width="811" alt="Skärmavbild 2021-10-10 kl  16 03 33" src="https://user-images.githubusercontent.com/11839563/136699026-0fdabe5d-b634-43eb-a69b-a1f8246567b0.png">
+
 # Tests and Documentation for Game Of Life.
 
 Fork of GameOfLife project adding tests and documentation for the project. This main page is the same as the Bitbucket README to avoid duplicating the information there.
