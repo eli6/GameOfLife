@@ -1,4 +1,4 @@
-# Game Of Life University Project
+# Game Of Life University Project (2017)
 
 [Game of Life](https://sv.wikipedia.org/wiki/Game_of_Life) is a zero-player game, simulating cells on screen as live or dead according to an initial configuration. 
 
